@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -185,4 +186,169 @@ body {
             <input type="date" id="date" class="form-control">
         </div>
         <div class="mb-3">
-            <label class="form-label"><i class="fas fa-exchange-alt"></i> กะที่ปฏิบ
+            <label class="form-label"><i class="fas fa-exchange-alt"></i> กะที่ปฏิบัติงาน</label>
+            <select id="shift" class="form-select">
+                <option value="กะ A">🌞 กะ A</option>
+                <option value="กะ B" selected>🌙 กะ B</option>
+            </select>
+        </div>
+
+        <label class="form-label"><i class="fas fa-calendar-week"></i> ประเภทวัน</label>
+        <div class="toggle-group" id="dayTypeToggle">
+            <div data-value="normal" class="toggle-option active">📆 วันปกติ</div>
+            <div data-value="sunday" class="toggle-option">☀️ วันอาทิตย์</div>
+        </div>
+
+        <div id="normalSection">
+            <label class="form-label"><i class="fas fa-user-minus"></i> 👤 พนักงานออก OT</label>
+            <div id="otOutList" class="staff-grid"></div>
+            <label class="form-label mt-3"><i class="fas fa-boxes"></i> 🧺 OT พับถุง</label>
+            <div id="otWorkList" class="staff-grid"></div>
+        </div>
+
+        <div id="sundaySection" style="display: none;">
+            <label class="form-label"><i class="fas fa-users"></i> 👥 พนักงาน (วันอาทิตย์)</label>
+            <div id="sundayStaffList" class="staff-grid"></div>
+            <label class="form-label mt-3"><i class="fas fa-wrench"></i> 🔧 ช่างผลิต</label>
+            <div id="technicianList" class="staff-grid"></div>
+        </div>
+
+        <button id="generateBtn" class="btn btn-generate w-100 mt-4">
+            <i class="fas fa-magic me-2"></i> สร้างข้อความ + คัดลอก
+        </button>
+
+        <div class="position-relative mt-4">
+            <div class="copy-badge d-none" id="copyBadge"><i class="fas fa-check-circle"></i> คัดลอกแล้ว</div>
+            <textarea id="result" class="result-area w-100" rows="6" readonly placeholder="ข้อความที่สร้างจะแสดงที่นี่..."></textarea>
+        </div>
+        <p class="text-muted small mt-2 text-center mb-0">
+            <i class="fas fa-mobile-alt"></i> แตะเลือกพนักงานได้หลายคน • คัดลอกอัตโนมัติ
+        </p>
+    </div>
+</div>
+
+<script>
+    const ALL_STAFF = ["ปิยนุช", "ศศิวิมล", "จงรัก", "พิไลยพร", "ภาวิตา", "ณัฐธิดา", "สุพิชญา"];
+    const TECHNICIANS = ["เสกสรร", "สุรศักดิ์"];
+
+    let selectedOtOut = new Set();
+    let selectedOtWork = new Set();
+    let selectedSundayStaff = new Set();
+    let selectedTech = new Set();
+    let currentDayType = "normal";
+
+    function setDefaultDate() {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        document.getElementById('date').value = `${yyyy}-${mm}-${dd}`;
+    }
+    setDefaultDate();
+
+    function renderStaffGrid(containerId, staffList, selectedSet) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        container.innerHTML = "";
+        staffList.forEach(name => {
+            const chip = document.createElement('div');
+            chip.className = `staff-chip ${selectedSet.has(name) ? 'active' : ''}`;
+            chip.innerHTML = `<span>${name}</span><i class="fas ${selectedSet.has(name) ? 'fa-check-circle' : 'fa-plus-circle'}"></i>`;
+            chip.addEventListener('click', () => {
+                if (selectedSet.has(name)) selectedSet.delete(name);
+                else selectedSet.add(name);
+                renderStaffGrid(containerId, staffList, selectedSet);
+            });
+            container.appendChild(chip);
+        });
+    }
+
+    function refreshUI() {
+        const isNormal = currentDayType === "normal";
+        document.getElementById("normalSection").style.display = isNormal ? "block" : "none";
+        document.getElementById("sundaySection").style.display = isNormal ? "none" : "block";
+        if (isNormal) {
+            renderStaffGrid("otOutList", ALL_STAFF, selectedOtOut);
+            renderStaffGrid("otWorkList", ALL_STAFF, selectedOtWork);
+        } else {
+            renderStaffGrid("sundayStaffList", ALL_STAFF, selectedSundayStaff);
+            renderStaffGrid("technicianList", TECHNICIANS, selectedTech);
+        }
+    }
+
+    function setDayType(type) {
+        currentDayType = type;
+        document.querySelectorAll('.toggle-option').forEach(opt => {
+            if (opt.getAttribute('data-value') === type) opt.classList.add('active');
+            else opt.classList.remove('active');
+        });
+        refreshUI();
+    }
+
+    document.querySelectorAll('.toggle-option').forEach(btn => {
+        btn.addEventListener('click', () => setDayType(btn.getAttribute('data-value')));
+    });
+
+    function formatDateToThai(dateStr) {
+        if (!dateStr) return "";
+        const d = new Date(dateStr);
+        if (isNaN(d.getTime())) return "";
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const yearBE = d.getFullYear() + 543;
+        return `${day}/${month}/${String(yearBE).slice(-2)}`;
+    }
+
+    function generateOTText() {
+        const shift = document.getElementById('shift').value;
+        const dateText = formatDateToThai(document.getElementById('date').value);
+        let output = "";
+        if (currentDayType === "sunday") {
+            output += `OT วันอาทิตย์ ${shift}\n`;
+            let index = 1;
+            if (selectedSundayStaff.size) {
+                output += "พนักงาน\n";
+                for (let name of selectedSundayStaff) output += `${index++}.${name}\n`;
+            }
+            if (selectedTech.size) {
+                output += "ช่างผลิต\n";
+                for (let name of selectedTech) output += `${index++}.${name}\n`;
+            }
+            if (!selectedSundayStaff.size && !selectedTech.size) output += "ไม่มีรายชื่อพนักงานค่ะ";
+        } else {
+            output += `${dateText} ${shift}\n`;
+            if (!selectedOtOut.size) output += `ไม่มีพนักงานออก OT ค่ะ\n`;
+            else {
+                output += `พนักงานออก OT ${selectedOtOut.size} คน ค่ะ\n`;
+                let idx = 1;
+                for (let name of selectedOtOut) output += `${idx++}.${name}\n`;
+            }
+            if (selectedOtWork.size) {
+                output += "OT พับถุง\n";
+                let idx = 1;
+                for (let name of selectedOtWork) output += `${idx++}.${name}\n`;
+            }
+        }
+        return output.trim();
+    }
+
+    async function generateAndCopy() {
+        const text = generateOTText();
+        const resultArea = document.getElementById('result');
+        resultArea.value = text;
+        try {
+            await navigator.clipboard.writeText(text);
+            const badge = document.getElementById('copyBadge');
+            badge.classList.remove('d-none');
+            setTimeout(() => badge.classList.add('d-none'), 1800);
+            Swal.fire({ icon: 'success', title: 'คัดลอกสำเร็จ!', text: 'ข้อความพร้อมส่งแล้ว', timer: 1500, showConfirmButton: false });
+        } catch {
+            Swal.fire('เกิดข้อผิดพลาด', 'กรุณาลองอีกครั้ง', 'error');
+        }
+    }
+
+    document.getElementById('generateBtn').addEventListener('click', generateAndCopy);
+    refreshUI();
+</script>
+</body>
+</html>
