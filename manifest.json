@@ -1,0 +1,22 @@
+{
+  "name": "ทีมพลัส TeamPlus",
+  "short_name": "ทีมพลัส",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#e8f6f7",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "https://i.supaimg.com/0bb45aa1-578e-4a4f-9427-4b59f2356d46/2bc78b65-d9ce-4e1a-ba2c-d4a53fc5e995.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://i.supaimg.com/0bb45aa1-578e-4a4f-9427-4b59f2356d46/2bc78b65-d9ce-4e1a-ba2c-d4a53fc5e995.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
