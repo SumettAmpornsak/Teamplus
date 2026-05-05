@@ -11,36 +11,21 @@
     <link rel="apple-touch-icon"
         href="https://i.supaimg.com/0bb45aa1-578e-4a4f-9427-4b59f2356d46/2bc78b65-d9ce-4e1a-ba2c-d4a53fc5e995.png">
     <title>ทีมพลัส · Teamplus</title>
-
-    <!-- PWA Manifest -->
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#3b82f6">
-    <!-- iOS / Safari Icons -->
+    <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon"
         href="https://i.supaimg.com/0bb45aa1-578e-4a4f-9427-4b59f2356d46/2bc78b65-d9ce-4e1a-ba2c-d4a53fc5e995.png">
-    <meta name="apple-mobile-web-app-title" content="ทีมพลัส">
-
-    <meta name="description" content="ทีมพลัส Teamplus เว็บแอพจัดการพนักงานและ OT" />
-    <meta name="keywords" content="ทีมพลัส, Teamplus,เว็บแอพจัดการพนักงานและOT" />
+    <meta name="description" content="ทีมพลัส Teamplus เว็บแอพจัดการพนักงาน OT และรายงานหลากหลายรูปแบบ" />
     <meta name="author" content="Sumett Ampornsak" />
     <link rel="icon"
         href="https://i.supaimg.com/0bb45aa1-578e-4a4f-9427-4b59f2356d46/2bc78b65-d9ce-4e1a-ba2c-d4a53fc5e995.png"
         type="image/x-icon" />
-    <!-- Google Fonts (Kanit ) -->
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Bootstrap 5 + Icons + core CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-    <!-- SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Kanit', sans-serif;
@@ -53,8 +38,8 @@
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(12px);
             border-radius: 36px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.02);
+            border: 1px solid rgba(255,255,255,0.5);
         }
 
         .form-label {
@@ -67,19 +52,18 @@
             gap: 8px;
         }
 
-        .form-control,
-        .form-select {
+        .form-control, .form-select {
             border-radius: 28px;
             border: 1px solid #e2e8f0;
             padding: 12px 18px;
             background: white;
             font-size: 0.95rem;
+            font-family: 'Kanit', sans-serif;
         }
 
-        .form-control:focus,
-        .form-select:focus {
+        .form-control:focus, .form-select:focus {
             border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
             outline: none;
         }
 
@@ -92,6 +76,8 @@
             padding: 16px;
             margin-top: 6px;
             border: 1px solid #eef2ff;
+            max-height: 280px;
+            overflow-y: auto;
         }
 
         .staff-chip {
@@ -101,7 +87,7 @@
             font-size: 0.85rem;
             font-weight: 500;
             color: #1f2937;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             border: 1px solid #e2e8f0;
             cursor: pointer;
             user-select: none;
@@ -111,19 +97,27 @@
             transition: all 0.2s ease;
         }
 
-        .staff-chip i {
-            font-size: 0.8rem;
-            color: #94a3b8;
-        }
+        .staff-chip i { font-size: 0.8rem; color: #94a3b8; }
 
         .staff-chip.active {
             background: #3b82f6;
             border-color: #3b82f6;
             color: white;
-            box-shadow: 0 6px 12px rgba(59, 130, 246, 0.25);
+            box-shadow: 0 6px 12px rgba(59,130,246,0.25);
         }
 
-        .staff-chip.active i {
+        .staff-chip.active i { color: white; }
+
+        .badge-type {
+            font-size: 0.7rem;
+            background: #e2e8f0;
+            border-radius: 20px;
+            padding: 2px 8px;
+            margin-left: 6px;
+        }
+
+        .staff-chip.active .badge-type {
+            background: rgba(255,255,255,0.3);
             color: white;
         }
 
@@ -151,7 +145,7 @@
         .toggle-option.active {
             background: white;
             color: #3b82f6;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         .btn-generate {
@@ -162,13 +156,12 @@
             font-weight: 600;
             font-size: 1rem;
             color: white;
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 8px 20px rgba(37,99,235,0.3);
             transition: transform 0.1s;
+            font-family: 'Kanit', sans-serif;
         }
 
-        .btn-generate:active {
-            transform: scale(0.97);
-        }
+        .btn-generate:active { transform: scale(0.97); }
 
         .result-area {
             background: #0f172a;
@@ -178,11 +171,6 @@
             border-radius: 28px;
             padding: 20px;
             border: none;
-        }
-
-        .result-area:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px #3b82f6;
         }
 
         .copy-badge {
@@ -197,90 +185,23 @@
             color: white;
         }
 
-        .section-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin: 12px 0 6px 6px;
-            color: #0f172a;
-        }
-
-        /* จัดการพนักงาน modal styles */
-        .staff-management-modal .modal-content {
-            border-radius: 32px;
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(4px);
-            border: none;
-        }
-
-        .staff-list-item {
-            background: #f8fafc;
-            border-radius: 60px;
-            padding: 8px 16px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: 0.1s;
-        }
-
-        .staff-name {
-            font-weight: 500;
-            font-size: 1rem;
-        }
-
-        .action-buttons .btn-icon {
-            background: transparent;
-            border: none;
-            padding: 6px 10px;
-            border-radius: 40px;
-            transition: 0.1s;
-        }
-
-        .btn-icon:hover {
-            background: #e2e8f0;
-        }
-
-        .add-staff-section {
-            background: #ffffffd9;
-            border-radius: 28px;
-            padding: 12px;
-            margin-top: 12px;
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 12px 10px 30px;
-            }
-
-            .staff-chip {
-                padding: 6px 14px;
-                font-size: 0.8rem;
-            }
-        }
-
-        /* footer */
         .footer-enhanced {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255,255,255,0.9);
             backdrop-filter: blur(8px);
             border-radius: 32px 32px 24px 24px;
-            border-top: 1px solid rgba(59, 130, 246, 0.2);
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.02), 0 8px 20px rgba(0, 0, 0, 0.05);
+            border-top: 1px solid rgba(59,130,246,0.2);
         }
 
         .badge-version {
             background: linear-gradient(135deg, #eef2ff, #e0e7ff);
             color: #1e40af;
             font-weight: 600;
-            border: none;
-            font-size: 0.75rem;
         }
 
         .splash-screen {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: linear-gradient(145deg, #e8f6f7 0%, #daddf0 100%);
             z-index: 9999;
             display: flex;
@@ -288,14 +209,10 @@
             align-items: center;
             justify-content: center;
             transition: opacity 0.5s ease, visibility 0.5s ease;
-            opacity: 1;
-            visibility: visible;
+            opacity: 1; visibility: visible;
         }
 
-        .splash-screen.hide {
-            opacity: 0;
-            visibility: hidden;
-        }
+        .splash-screen.hide { opacity: 0; visibility: hidden; }
 
         .splash-logo {
             width: 120px;
@@ -305,56 +222,204 @@
         }
 
         @keyframes pulse {
-            0% {
-                transform: scale(0.95);
-                opacity: 0.8;
-            }
-
-            50% {
-                transform: scale(1.05);
-                opacity: 1;
-            }
-
-            100% {
-                transform: scale(0.95);
-                opacity: 0.8;
-            }
+            0%   { transform: scale(0.95); opacity: 0.8; }
+            50%  { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
         }
 
-        .spinner-wave {
-            display: flex;
-            gap: 5px;
-            margin-top: 30px;
-        }
-
+        .spinner-wave { display: flex; gap: 5px; margin-top: 30px; }
         .spinner-wave span {
-            width: 8px;
-            height: 8px;
+            width: 8px; height: 8px;
             background-color: #3b82f6;
             border-radius: 50%;
             display: inline-block;
             animation: wave 1s infinite ease-in-out both;
         }
+        .spinner-wave span:nth-child(2) { animation-delay: 0.15s; }
+        .spinner-wave span:nth-child(3) { animation-delay: 0.3s; }
 
         @keyframes wave {
-
-            0%,
-            80%,
-            100% {
-                transform: scale(0);
-                opacity: 0.5;
-            }
-
-            40% {
-                transform: scale(1);
-                opacity: 1;
-            }
+            0%, 80%, 100% { transform: scale(0); opacity: 0.5; }
+            40%            { transform: scale(1); opacity: 1; }
         }
+
+        @media (max-width: 480px) {
+            body { padding: 12px 10px 30px; }
+            .staff-chip { padding: 6px 12px; font-size: 0.75rem; }
+        }
+
+        /* ========== MODAL REDESIGN ========== */
+        .staff-management-modal .modal-content {
+            border-radius: 28px;
+            background: white;
+            border: none;
+            overflow: hidden;
+        }
+
+        .modal-header-custom {
+            padding: 24px 24px 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .modal-title-group { display: flex; align-items: center; gap: 14px; }
+
+        .modal-icon-box {
+            width: 48px; height: 48px;
+            background: #EEF2FF;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; flex-shrink: 0; color: #3b82f6;
+        }
+
+        .modal-main-title { font-size: 18px; font-weight: 600; color: #0f172a; margin: 0; }
+        .modal-sub-title  { font-size: 13px; color: #64748b; margin-top: 2px; }
+
+        .modal-close-btn {
+            width: 32px; height: 32px; border-radius: 50%;
+            border: 1px solid #e2e8f0;
+            background: transparent;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; color: #64748b; font-size: 13px; flex-shrink: 0;
+            transition: background 0.15s;
+        }
+        .modal-close-btn:hover { background: #f1f5f9; }
+
+        .modal-tab-bar {
+            display: flex;
+            padding: 20px 24px 0;
+            border-bottom: 1px solid #e2e8f0;
+            margin-top: 20px; gap: 0;
+        }
+
+        .modal-tab-btn {
+            padding: 10px 18px;
+            font-size: 14px; font-weight: 500;
+            cursor: pointer; border: none; background: transparent;
+            color: #64748b;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all 0.15s;
+            display: flex; align-items: center; gap: 7px;
+            white-space: nowrap; font-family: 'Kanit', sans-serif;
+        }
+        .modal-tab-btn.active { color: #3b82f6; border-bottom-color: #3b82f6; }
+
+        .modal-tab-count {
+            background: #EFF6FF; color: #3b82f6;
+            font-size: 11px; font-weight: 500;
+            border-radius: 20px; padding: 2px 7px;
+            min-width: 20px; text-align: center;
+        }
+        .modal-tab-btn.active .modal-tab-count { background: #DBEAFE; }
+
+        .modal-body-custom { padding: 20px 24px; }
+
+        .staff-modern-list {
+            display: flex; flex-direction: column; gap: 8px;
+            max-height: 240px; overflow-y: auto;
+            margin-bottom: 16px; padding-right: 4px;
+        }
+        .staff-modern-list::-webkit-scrollbar { width: 4px; }
+        .staff-modern-list::-webkit-scrollbar-track { background: transparent; }
+        .staff-modern-list::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+
+        .staff-modern-row {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 14px; border-radius: 12px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            transition: border-color 0.15s;
+        }
+        .staff-modern-row:hover { border-color: #cbd5e1; }
+
+        .staff-avatar-box {
+            width: 34px; height: 34px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; flex-shrink: 0;
+        }
+        .av-prod { background: #DBEAFE; color: #1D4ED8; }
+        .av-tech { background: #D1FAE5; color: #065F46; }
+        .av-qc   { background: #FEF3C7; color: #92400E; }
+
+        .staff-modern-name {
+            flex: 1; font-size: 14px; font-weight: 500; color: #1e293b;
+        }
+
+        .action-btn-group { display: flex; gap: 6px; }
+
+        .action-icon-btn {
+            width: 30px; height: 30px; border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            background: white;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 12px; color: #64748b;
+            transition: all 0.15s;
+        }
+        .action-icon-btn.edit:hover { color: #D97706; border-color: #FDE68A; background: #FFFBEB; }
+        .action-icon-btn.del:hover  { color: #DC2626; border-color: #FECACA; background: #FEF2F2; }
+
+        .add-staff-row {
+            display: flex; gap: 10px; align-items: center;
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 14px; padding: 10px 14px;
+            transition: all 0.15s;
+        }
+        .add-staff-row:focus-within {
+            border-color: #93C5FD; border-style: solid; background: white;
+        }
+
+        .add-staff-icon { font-size: 14px; color: #94a3b8; flex-shrink: 0; }
+
+        .add-staff-input {
+            flex: 1; border: none; background: transparent;
+            font-size: 14px; font-family: 'Kanit', sans-serif;
+            color: #1e293b; outline: none;
+        }
+        .add-staff-input::placeholder { color: #94a3b8; }
+
+        .add-staff-btn {
+            background: #3b82f6; color: white; border: none;
+            border-radius: 8px; padding: 6px 14px;
+            font-size: 13px; font-weight: 500; cursor: pointer;
+            font-family: 'Kanit', sans-serif; transition: background 0.15s;
+            white-space: nowrap; display: flex; align-items: center; gap: 5px;
+        }
+        .add-staff-btn:hover { background: #2563EB; }
+
+        .modal-footer-custom {
+            padding: 16px 24px 24px;
+            border-top: 1px solid #e2e8f0;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        }
+
+        .total-info { font-size: 13px; color: #64748b; display: flex; align-items: center; gap: 6px; }
+        .total-info .num { font-weight: 600; color: #1e293b; }
+
+        .done-modal-btn {
+            background: #3b82f6; color: white; border: none;
+            border-radius: 40px; padding: 10px 28px;
+            font-size: 14px; font-weight: 500; cursor: pointer;
+            font-family: 'Kanit', sans-serif;
+            display: flex; align-items: center; gap: 8px;
+            transition: background 0.15s;
+        }
+        .done-modal-btn:hover { background: #2563EB; }
+
+        .modal-tab-panel { display: none; }
+        .modal-tab-panel.active { display: block; }
+
+        .empty-state-modal {
+            text-align: center; padding: 24px 0;
+            color: #94a3b8; font-size: 13px;
+        }
+        .empty-state-modal i { font-size: 28px; display: block; margin-bottom: 8px; opacity: 0.5; }
     </style>
 </head>
 
 <body>
-    <!-- Splash Screen -->
     <div id="splashScreen" class="splash-screen">
         <img src="https://i.supaimg.com/0bb45aa1-578e-4a4f-9427-4b59f2356d46/2bc78b65-d9ce-4e1a-ba2c-d4a53fc5e995.png"
             alt="ทีมพลัส" class="splash-logo">
@@ -363,25 +428,33 @@
         <div class="spinner-wave"><span></span><span></span><span></span></div>
     </div>
 
-    <div class="container px-0" style="max-width: 560px; margin: 0 auto;">
+    <div class="container px-0" style="max-width: 640px; margin: 0 auto;">
         <div class="glass-card p-4">
-            <!-- Header + ปุ่มจัดการพนักงาน -->
-            <div class="d-flex align-items-center justify-content-between mb-3">
+            <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
                 <div class="d-flex align-items-center gap-3">
-                    <div
-                        style="background: #3b82f6; width: 70px; height: 70px; border-radius: 35px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <div style="background: #3b82f6; width: 70px; height: 70px; border-radius: 35px; display: flex; align-items: center; justify-content: center;">
                         <img src="https://i.supaimg.com/0bb45aa1-578e-4a4f-9427-4b59f2356d46/2bc78b65-d9ce-4e1a-ba2c-d4a53fc5e995.png"
                             alt="" style="width: 100%; height: 100%; border-radius: 35px; object-fit: cover;">
                     </div>
                     <div>
                         <h3 class="mb-0 fw-bold" style="color: #0f172a; font-size: 1.8rem;">ทีมพลัส</h3>
-                        <p class="text-secondary mb-0 small">ระบบจัดการพนักงานและ OT</p>
+                        <p class="text-secondary mb-0 small">ระบบจัดการพนักงาน และ OT อัจฉริยะ</p>
                     </div>
                 </div>
                 <button class="btn btn-outline-primary rounded-pill shadow-sm" data-bs-toggle="modal"
                     data-bs-target="#staffManagementModal" style="border-radius: 40px; padding: 8px 16px;">
-                    <i class="fas fa-user-edit me-1"></i> จัดการพนักงาน
+                    <i class="fas fa-users-gear me-1"></i> จัดการพนักงาน
                 </button>
+            </div>
+
+            <div class="mb-4">
+                <label class="form-label"><i class="fas fa-chart-line"></i> ประเภทรายงาน</label>
+                <select id="reportTypeSelect" class="form-select">
+                    <option value="ot_normal">OT ปกติ (วันปกติ)</option>
+                    <option value="ot_sunday">OT วันอาทิตย์</option>
+                    <option value="report_attendance">รายงานการมาปฏิบัติงาน</option>
+                    <option value="report_ot_new">รายงานออก OT แบบใหม่</option>
+                </select>
             </div>
 
             <div class="mb-3">
@@ -396,531 +469,535 @@
                 </select>
             </div>
 
-            <label class="form-label"><i class="fas fa-calendar-week"></i> ประเภทวัน</label>
-            <div class="toggle-group" id="dayTypeToggle">
-                <div data-value="normal" class="toggle-option active">วันปกติ</div>
-                <div data-value="sunday" class="toggle-option">วันอาทิตย์</div>
+            <!-- OT ปกติ -->
+            <div id="otNormalSection">
+
+                <div id="normalSection">
+                    <label class="form-label"><i class="fas fa-user-minus"></i> พนักงานออก OT</label>
+                    <div id="otOutList" class="staff-grid"></div>
+                    <label class="form-label mt-3"><i class="fas fa-boxes"></i> OT พับถุง</label>
+                    <div id="otWorkList" class="staff-grid"></div>
+                </div>
+                <div id="sundaySection" style="display: none;">
+                    <label class="form-label"><i class="fas fa-users"></i> พนักงาน (วันอาทิตย์)</label>
+                    <div id="sundayStaffList" class="staff-grid"></div>
+                    <label class="form-label mt-3"><i class="fas fa-wrench"></i> ช่างผลิต</label>
+                    <div id="technicianList" class="staff-grid"></div>
+                </div>
             </div>
 
-            <div id="normalSection">
-                <label class="form-label"><i class="fas fa-user-minus"></i>พนักงานออก OT</label>
-                <div id="otOutList" class="staff-grid"></div>
-                <label class="form-label mt-3"><i class="fas fa-boxes"></i>OT พับถุง</label>
-                <div id="otWorkList" class="staff-grid"></div>
+            <!-- รายงานการมาปฏิบัติงาน -->
+            <div id="reportAttendanceSection" style="display: none;">
+                <label class="form-label"><i class="fas fa-thermometer-half"></i> พนักงานที่ลาป่วย</label>
+                <div id="sickStaffList" class="staff-grid"></div>
+                <label class="form-label mt-3"><i class="fas fa-briefcase"></i> พนักงานที่ลากิจ</label>
+                <div id="personalLeaveStaffList" class="staff-grid"></div>
             </div>
 
-            <div id="sundaySection" style="display: none;">
-                <label class="form-label"><i class="fas fa-users"></i>พนักงาน (วันอาทิตย์)</label>
-                <div id="sundayStaffList" class="staff-grid"></div>
-                <label class="form-label mt-3"><i class="fas fa-wrench"></i>ช่างผลิต</label>
-                <div id="technicianList" class="staff-grid"></div>
+            <!-- รายงานออก OT แบบใหม่ -->
+            <div id="reportOtNewSection" style="display: none;">
+                <label class="form-label"><i class="fas fa-industry"></i> พนักงานผลิต (ออก OT)</label>
+                <div id="otNewProdList" class="staff-grid"></div>
+                <label class="form-label mt-3"><i class="fas fa-screwdriver-wrench"></i> ช่างผลิต (ออก OT)</label>
+                <div id="otNewTechList" class="staff-grid"></div>
+                <label class="form-label mt-3"><i class="fas fa-magnifying-glass-chart"></i> QC (ออก OT)</label>
+                <div id="otNewQcList" class="staff-grid"></div>
             </div>
 
             <button id="generateBtn" class="btn btn-generate w-100 mt-4">
-                <i class="fas fa-magic me-2"></i> สร้างข้อความ + คัดลอก
+                <i class="fas fa-wand-magic-sparkles me-2"></i> สร้างข้อความ + คัดลอก
             </button>
 
             <div class="position-relative mt-4">
-                <div class="copy-badge d-none" id="copyBadge"><i class="fas fa-check-circle"></i> คัดลอกแล้ว</div>
-                <textarea id="result" class="result-area w-100" rows="6" readonly
+                <div class="copy-badge d-none" id="copyBadge"><i class="fas fa-circle-check"></i> คัดลอกแล้ว</div>
+                <textarea id="result" class="result-area w-100" rows="7" readonly
                     placeholder="ข้อความที่สร้างจะแสดงที่นี่..."></textarea>
             </div>
-            <p class="text-muted small mt-2 text-center mb-0">
-                <i class="fas fa-mobile-alt"></i> แตะเลือกพนักงานได้หลายคน • คัดลอกอัตโนมัติ
-            </p>
         </div>
 
-        <!-- Footer -->
         <footer class="footer-enhanced mt-4 pt-3 pb-3 px-3">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-                <div class="text-center text-md-start small text-soft-muted">
-                    <i class="far fa-copyright me-1"></i>
-                    <span id="currentYear"></span>
-                    <a href="https://sumettampornsak.vercel.app" target="_blank"
-                        class="text-primary fw-semibold mx-1">Sumett Ampornsak</a>
-                    <span class="mx-1 d-none d-sm-inline">•</span>
+                <div class="text-center text-md-start small">
+                    <i class="far fa-copyright me-1"></i> <span id="currentYear"></span>
+                    <a href="#" class="text-primary fw-semibold mx-1">Sumett Ampornsak</a>
                     <span class="d-block d-sm-inline">All rights reserved.</span>
                 </div>
                 <div class="d-flex flex-wrap align-items-center justify-content-center gap-2">
-                    <span class="badge-version badge rounded-pill d-inline-flex align-items-center px-3 py-2">
-                        <i class="fas fa-tag me-1"></i> เวอร์ชัน 7.3.0
+                    <span class="badge-version badge rounded-pill px-3 py-2">
+                        <i class="fas fa-tag me-1"></i> เวอร์ชัน 9.5.0
                     </span>
                     <div class="text-muted small d-flex align-items-center gap-1 ms-md-2">
                         <i class="fas fa-sync-alt fa-xs opacity-75"></i>
-                        <span>อัปเดตล่าสุด: 23 เมษายน 2569</span>
+                        <span>อัปเดตล่าสุด: 05/05/69</span>
                     </div>
                 </div>
             </div>
             <div class="text-center mt-2 opacity-50" style="font-size: 0.65rem;">
                 <i class="fas fa-heart" style="color: #3b82f6;"></i> Dev By Sumett Ampornsak
             </div>
+                </div>
+            </div>
         </footer>
     </div>
 
-    <!-- MODAL จัดการพนักงาน (เพิ่ม/แก้ไข/ลบ) -->
-    <div class="modal fade staff-management-modal" id="staffManagementModal" data-bs-backdrop="static" tabindex="-1"
-        aria-labelledby="staffModalLabel" aria-hidden="true">
+    <!-- MODAL จัดการพนักงาน (redesigned) -->
+    <div class="modal fade staff-management-modal" id="staffManagementModal" data-bs-backdrop="static" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header border-0 pt-4 px-4">
-                    <h5 class="modal-title fw-bold" id="staffModalLabel"><i
-                            class="fas fa-users-gear me-2"></i>จัดการพนักงานทั้งหมด</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body px-4 pb-4">
-                    <!-- Tab ง่าย: พนักงานทั่วไป และ ช่างผลิต -->
-                    <ul class="nav nav-tabs mb-3" id="staffTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="staff-tab" data-bs-toggle="tab"
-                                data-bs-target="#staffTabContent" type="button" role="tab">พนักงานทั่วไป</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="tech-tab" data-bs-toggle="tab" data-bs-target="#techTabContent"
-                                type="button" role="tab">ช่างผลิต</button>
-                        </li>
-                    </ul>
-                    <div class="tab-content">
-                        <!-- พนักงานทั่วไป -->
-                        <div class="tab-pane fade show active" id="staffTabContent" role="tabpanel">
-                            <div id="staffListContainer" class="mb-3"
-                                style="max-height: 320px; overflow-y: auto; padding-right: 5px;">
-                                <!-- dynamic staff list -->
-                            </div>
-                            <div class="add-staff-section">
-                                <div class="input-group">
-                                    <input type="text" id="newStaffName" class="form-control"
-                                        placeholder="ชื่อพนักงานใหม่" autocomplete="off">
-                                    <button class="btn btn-primary rounded-pill px-4" id="addStaffBtn"><i
-                                            class="fas fa-plus"></i> เพิ่ม</button>
-                                </div>
-                            </div>
+
+                <!-- Header -->
+                <div class="modal-header-custom">
+                    <div class="modal-title-group">
+                        <div class="modal-icon-box">
+                            <i class="fas fa-users-gear"></i>
                         </div>
-                        <!-- ช่างผลิต -->
-                        <div class="tab-pane fade" id="techTabContent" role="tabpanel">
-                            <div id="techListContainer" class="mb-3"
-                                style="max-height: 320px; overflow-y: auto; padding-right: 5px;">
-                                <!-- dynamic tech list -->
-                            </div>
-                            <div class="add-staff-section">
-                                <div class="input-group">
-                                    <input type="text" id="newTechName" class="form-control"
-                                        placeholder="ชื่อช่างผลิตใหม่" autocomplete="off">
-                                    <button class="btn btn-primary rounded-pill px-4" id="addTechBtn"><i
-                                            class="fas fa-plus"></i> เพิ่ม</button>
-                                </div>
-                            </div>
+                        <div>
+                            <div class="modal-main-title">จัดการพนักงาน</div>
+                            <div class="modal-sub-title">เพิ่ม แก้ไข หรือลบรายชื่อพนักงาน</div>
                         </div>
                     </div>
-                    <div class="alert alert-info mt-3 small py-2 mb-0">
-                        <i class="fas fa-info-circle"></i> การแก้ไข/ลบ จะอัปเดตข้อมูลทันที
-                        และรักษาการเลือกพนักงานที่เหลืออยู่
+                    <button class="modal-close-btn" data-bs-dismiss="modal">
+                        <i class="fas fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Tabs -->
+                <div class="modal-tab-bar">
+                    <button class="modal-tab-btn active" onclick="switchModalTab('prod', this)">
+                        <i class="fas fa-industry"></i> พนักงานผลิต
+                        <span class="modal-tab-count" id="cnt-prod">0</span>
+                    </button>
+                    <button class="modal-tab-btn" onclick="switchModalTab('tech', this)">
+                        <i class="fas fa-screwdriver-wrench"></i> ช่างผลิต
+                        <span class="modal-tab-count" id="cnt-tech">0</span>
+                    </button>
+                    <button class="modal-tab-btn" onclick="switchModalTab('qc', this)">
+                        <i class="fas fa-magnifying-glass-chart"></i> QC
+                        <span class="modal-tab-count" id="cnt-qc">0</span>
+                    </button>
+                </div>
+
+                <!-- Body -->
+                <div class="modal-body-custom">
+
+                    <!-- พนักงานผลิต -->
+                    <div class="modal-tab-panel active" id="modal-panel-prod">
+                        <div class="staff-modern-list" id="modal-list-prod"></div>
+                        <div class="add-staff-row">
+                            <i class="fas fa-user-plus add-staff-icon"></i>
+                            <input class="add-staff-input" id="newProdName" placeholder="ชื่อพนักงานผลิต..."
+                                onkeydown="if(event.key==='Enter') addProdModal()">
+                            <button class="add-staff-btn" id="addProdBtn">
+                                <i class="fas fa-plus"></i> เพิ่ม
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- ช่างผลิต -->
+                    <div class="modal-tab-panel" id="modal-panel-tech">
+                        <div class="staff-modern-list" id="modal-list-tech"></div>
+                        <div class="add-staff-row">
+                            <i class="fas fa-user-plus add-staff-icon"></i>
+                            <input class="add-staff-input" id="newTechName" placeholder="ชื่อช่างผลิต..."
+                                onkeydown="if(event.key==='Enter') addTechModal()">
+                            <button class="add-staff-btn" id="addTechBtn">
+                                <i class="fas fa-plus"></i> เพิ่ม
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- QC -->
+                    <div class="modal-tab-panel" id="modal-panel-qc">
+                        <div class="staff-modern-list" id="modal-list-qc"></div>
+                        <div class="add-staff-row">
+                            <i class="fas fa-user-plus add-staff-icon"></i>
+                            <input class="add-staff-input" id="newQcName" placeholder="ชื่อ QC..."
+                                onkeydown="if(event.key==='Enter') addQcModal()">
+                            <button class="add-staff-btn" id="addQcBtn">
+                                <i class="fas fa-plus"></i> เพิ่ม
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer border-0 pb-4">
-                    <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">ปิด</button>
+
+                <!-- Footer -->
+                <div class="modal-footer-custom">
+                    <div class="total-info">
+                        <i class="fas fa-users" style="color:#3b82f6; font-size:14px;"></i>
+                        รวมทั้งหมด <span class="num" id="total-all">0</span> คน
+                    </div>
+                    <button class="done-modal-btn" data-bs-dismiss="modal">
+                        <i class="fas fa-check"></i> เสร็จสิ้น
+                    </button>
                 </div>
+
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // ---------- PWA Register ----------
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js').catch(err => console.error("SW failed:", err));
-            });
+            window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(e => console.log(e)));
         }
 
-        // ---------- ระบบจัดการพนักงาน + localStorage ----------
-        let masterStaff = [];      // รายชื่อพนักงานทั่วไป
-        let masterTech = [];       // รายชื่อช่างผลิต
+        // ========== ข้อมูลหลัก ==========
+        let masterProd = [];
+        let masterTech = [];
+        let masterQc   = [];
 
-        // ฟังก์ชันโหลดข้อมูลจาก localStorage หรือใช้ default
+        let selectedOtOut      = new Set();
+        let selectedOtWork     = new Set();
+        let selectedSundayStaff = new Set();
+        let selectedTechSunday = new Set();
+        let selectedSickSet          = new Set();
+        let selectedPersonalLeaveSet = new Set();
+        let selectedOtNewSet         = new Set();
+
+        // โหลด / บันทึก
         function loadStaffData() {
-            const stored = localStorage.getItem("teamplus_staff_data");
+            const stored = localStorage.getItem("teamplus_full_data");
             if (stored) {
                 try {
                     const data = JSON.parse(stored);
-                    masterStaff = data.staff || [];
+                    masterProd = data.prod || [];
                     masterTech = data.tech || [];
-                } catch (e) { useDefaultStaff(); }
-            } else {
-                useDefaultStaff();
-            }
-            // ตรวจสอบความถูกต้อง
-            if (!masterStaff.length) masterStaff = ["ปิยนุช", "ศศิวิมล", "จงรัก", "พิไลยพร", "ภาวิตา", "ณัฐธิดา", "สุพิชญา", "ภาณุ", "สิทธิศักดิ์", "นุชนารถ", "กรรณิกา"];
-            if (!masterTech.length) masterTech = ["เสกสรร", "สุรศักดิ์"];
+                    masterQc   = data.qc   || [];
+                } catch(e) { useDefaults(); }
+            } else { useDefaults(); }
+            if (!masterProd.length) masterProd = ["ปิยนุช","ศศิวิมล","จงรัก","พิไลยพร","ภาวิตา","ณัฐธิดา","สุพิชญา","ภาณุ","สิทธิศักดิ์","นุชนารถ","กรรณิกา"];
+            if (!masterTech.length) masterTech = ["เสกสรร","สุรศักดิ์"];
+            if (!masterQc.length)   masterQc   = ["คนที่ 1","คนที่ 2"];
         }
-        function useDefaultStaff() {
-            masterStaff = ["ปิยนุช", "ศศิวิมล", "จงรัก", "พิไลยพร", "ภาวิตา", "ณัฐธิดา", "สุพิชญา", "ภาณุ", "สิทธิศักดิ์", "นุชนารถ", "กรรณิกา"];
-            masterTech = ["เสกสรร", "สุรศักดิ์"];
+
+        function useDefaults() {
+            masterProd = ["ปิยนุช","ศศิวิมล","จงรัก","พิไลยพร","ภาวิตา","ณัฐธิดา","สุพิชญา","ภาณุ","สิทธิศักดิ์","นุชนารถ","กรรณิกา"];
+            masterTech = ["เสกสรร","สุรศักดิ์"];
+            masterQc   = ["คนที่ 1","คนที่ 2"];
         }
+
         function saveStaffData() {
-            localStorage.setItem("teamplus_staff_data", JSON.stringify({ staff: masterStaff, tech: masterTech }));
+            localStorage.setItem("teamplus_full_data", JSON.stringify({ prod: masterProd, tech: masterTech, qc: masterQc }));
         }
 
-        // ชุด selected (Sets)
-        let selectedOtOut = new Set();
-        let selectedOtWork = new Set();
-        let selectedSundayStaff = new Set();
-        let selectedTech = new Set();
-
-        // ฟังก์ชันทำความสะอาด selections เมื่อลบ/เปลี่ยนชื่อพนักงานทั่วไป
-        function removeStaffFromAllSets(staffName) {
-            selectedOtOut.delete(staffName);
-            selectedOtWork.delete(staffName);
-            selectedSundayStaff.delete(staffName);
-        }
-        function updateStaffNameInAllSets(oldName, newName) {
-            if (selectedOtOut.has(oldName)) { selectedOtOut.delete(oldName); selectedOtOut.add(newName); }
-            if (selectedOtWork.has(oldName)) { selectedOtWork.delete(oldName); selectedOtWork.add(newName); }
-            if (selectedSundayStaff.has(oldName)) { selectedSundayStaff.delete(oldName); selectedSundayStaff.add(newName); }
-        }
-        function removeTechFromSet(techName) {
-            selectedTech.delete(techName);
-        }
-        function updateTechNameInSet(oldName, newName) {
-            if (selectedTech.has(oldName)) { selectedTech.delete(oldName); selectedTech.add(newName); }
+        function getAllPersonnel() {
+            let all = [];
+            masterProd.forEach(name => all.push({ name, type: "ผลิต" }));
+            masterTech.forEach(name => all.push({ name, type: "ช่าง" }));
+            masterQc.forEach(name   => all.push({ name, type: "QC"   }));
+            return all;
         }
 
-        // ----- CRUD พนักงานทั่วไป -----
-        function addStaff(name) {
-            name = name.trim();
-            if (!name) return false;
-            if (masterStaff.includes(name)) { Swal.fire("มีชื่อนี้แล้ว", "กรุณาใช้ชื่ออื่น", "warning"); return false; }
-            masterStaff.push(name);
-            saveStaffData();
-            refreshUI();
-            renderStaffModalLists();  // อัปเดต modal
-            return true;
+        function removeNameFromAllSets(name) {
+            [selectedOtOut, selectedOtWork, selectedSundayStaff, selectedTechSunday, selectedSickSet, selectedPersonalLeaveSet, selectedOtNewSet]
+                .forEach(s => s.delete(name));
         }
-        function editStaff(oldName, newName) {
-            newName = newName.trim();
-            if (!newName) return false;
-            if (oldName === newName) return true;
-            if (masterStaff.includes(newName)) { Swal.fire("ชื่อซ้ำ", "ไม่สามารถเปลี่ยนเป็นชื่อที่มีอยู่แล้ว", "error"); return false; }
-            const idx = masterStaff.indexOf(oldName);
-            if (idx !== -1) {
-                masterStaff[idx] = newName;
-                updateStaffNameInAllSets(oldName, newName);
-                saveStaffData();
-                refreshUI();
-                renderStaffModalLists();
+
+        function updateNameInAllSets(oldName, newName) {
+            [selectedOtOut, selectedOtWork, selectedSundayStaff, selectedTechSunday, selectedSickSet, selectedPersonalLeaveSet, selectedOtNewSet]
+                .forEach(s => { if (s.has(oldName)) { s.delete(oldName); s.add(newName); } });
+        }
+
+        // ========== MODAL: render lists ==========
+        const avClass = { prod: 'av-prod', tech: 'av-tech', qc: 'av-qc' };
+        const avIcon  = { prod: 'fa-person', tech: 'fa-wrench', qc: 'fa-eye' };
+
+        function renderModalList(type) {
+            const arr = type === 'prod' ? masterProd : type === 'tech' ? masterTech : masterQc;
+            const list = document.getElementById('modal-list-' + type);
+            if (!list) return;
+            list.innerHTML = '';
+            if (!arr.length) {
+                list.innerHTML = `<div class="empty-state-modal"><i class="fas fa-inbox"></i>ยังไม่มีรายชื่อ</div>`;
+            } else {
+                arr.forEach((name, i) => {
+                    const row = document.createElement('div');
+                    row.className = 'staff-modern-row';
+                    row.innerHTML = `
+                        <div class="staff-avatar-box ${avClass[type]}">
+                            <i class="fas ${avIcon[type]}"></i>
+                        </div>
+                        <div class="staff-modern-name">${escapeHtml(name)}</div>
+                        <div class="action-btn-group">
+                            <button class="action-icon-btn edit" title="แก้ไข" onclick="editModalStaff('${type}',${i})">
+                                <i class="fas fa-pen"></i>
+                            </button>
+                            <button class="action-icon-btn del" title="ลบ" onclick="deleteModalStaff('${type}',${i})">
+                                <i class="fas fa-trash-can"></i>
+                            </button>
+                        </div>`;
+                    list.appendChild(row);
+                });
             }
-            return true;
+            const cnt = document.getElementById('cnt-' + type);
+            if (cnt) cnt.textContent = arr.length;
+            updateModalTotal();
         }
-        function deleteStaff(name) {
+
+        function updateModalTotal() {
+            const el = document.getElementById('total-all');
+            if (el) el.textContent = masterProd.length + masterTech.length + masterQc.length;
+        }
+
+        function renderAllModalLists() {
+            renderModalList('prod');
+            renderModalList('tech');
+            renderModalList('qc');
+        }
+
+        function addModalStaff(type, inputId) {
+            const inp = document.getElementById(inputId);
+            const val = inp.value.trim();
+            const arr = type === 'prod' ? masterProd : type === 'tech' ? masterTech : masterQc;
+            if (!val || arr.includes(val)) {
+                inp.style.outline = '2px solid #FCA5A5';
+                setTimeout(() => inp.style.outline = '', 600);
+                return;
+            }
+            arr.push(val);
+            inp.value = '';
+            saveStaffData();
+            renderModalList(type);
+            refreshAllUI();
+        }
+
+        function addProdModal() { addModalStaff('prod', 'newProdName'); }
+        function addTechModal() { addModalStaff('tech', 'newTechName'); }
+        function addQcModal()   { addModalStaff('qc',   'newQcName');   }
+
+        function editModalStaff(type, idx) {
+            const arr = type === 'prod' ? masterProd : type === 'tech' ? masterTech : masterQc;
+            const oldName = arr[idx];
             Swal.fire({
-                title: "ยืนยันการลบ?",
-                text: `ลบพนักงาน "${name}" ออกจากระบบ (จะถูกลบจากการเลือกทั้งหมด)`,
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                confirmButtonText: "ลบเลย",
-                cancelButtonText: "ยกเลิก"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    const idx = masterStaff.indexOf(name);
-                    if (idx !== -1) {
-                        masterStaff.splice(idx, 1);
-                        removeStaffFromAllSets(name);
-                        saveStaffData();
-                        refreshUI();
-                        renderStaffModalLists();
-                        Swal.fire("ลบสำเร็จ", "", "success");
-                    }
+                title: 'แก้ไขชื่อ', input: 'text', inputValue: oldName,
+                confirmButtonText: 'บันทึก', showCancelButton: true, cancelButtonText: 'ยกเลิก',
+                preConfirm: (newName) => {
+                    if (!newName || !newName.trim()) { Swal.showValidationMessage('กรุณากรอกชื่อ'); return false; }
+                    return newName.trim();
+                }
+            }).then(res => {
+                if (res.isConfirmed && res.value && res.value !== oldName) {
+                    arr[idx] = res.value;
+                    updateNameInAllSets(oldName, res.value);
+                    saveStaffData();
+                    renderModalList(type);
+                    refreshAllUI();
                 }
             });
         }
 
-        // ----- CRUD ช่างผลิต -----
-        function addTech(name) {
-            name = name.trim();
-            if (!name) return false;
-            if (masterTech.includes(name)) { Swal.fire("มีชื่อช่างนี้แล้ว", "", "warning"); return false; }
-            masterTech.push(name);
-            saveStaffData();
-            refreshUI();
-            renderStaffModalLists();
-            return true;
-        }
-        function editTech(oldName, newName) {
-            newName = newName.trim();
-            if (!newName) return false;
-            if (oldName === newName) return true;
-            if (masterTech.includes(newName)) { Swal.fire("ชื่อซ้ำ", "ไม่สามารถเปลี่ยนเป็นชื่อที่มีอยู่แล้ว", "error"); return false; }
-            const idx = masterTech.indexOf(oldName);
-            if (idx !== -1) {
-                masterTech[idx] = newName;
-                updateTechNameInSet(oldName, newName);
-                saveStaffData();
-                refreshUI();
-                renderStaffModalLists();
-            }
-            return true;
-        }
-        function deleteTech(name) {
+        function deleteModalStaff(type, idx) {
+            const arr = type === 'prod' ? masterProd : type === 'tech' ? masterTech : masterQc;
+            const name = arr[idx];
             Swal.fire({
-                title: "ลบช่างผลิต?",
-                text: `ลบ "${name}" ออกจากรายชื่อช่าง`,
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                confirmButtonText: "ลบ",
-            }).then((res) => {
+                title: 'ยืนยันลบ?', text: `ลบ "${name}" ออกจากรายชื่อ`,
+                icon: 'warning', showCancelButton: true,
+                confirmButtonColor: '#d33', confirmButtonText: 'ลบ', cancelButtonText: 'ยกเลิก'
+            }).then(res => {
                 if (res.isConfirmed) {
-                    const idx = masterTech.indexOf(name);
-                    if (idx !== -1) {
-                        masterTech.splice(idx, 1);
-                        removeTechFromSet(name);
-                        saveStaffData();
-                        refreshUI();
-                        renderStaffModalLists();
-                        Swal.fire("ลบแล้ว", "", "success");
-                    }
+                    arr.splice(idx, 1);
+                    removeNameFromAllSets(name);
+                    saveStaffData();
+                    renderModalList(type);
+                    refreshAllUI();
+                    Swal.fire({ icon: 'success', title: 'ลบสำเร็จ', timer: 1200, showConfirmButton: false });
                 }
             });
         }
 
-        // render รายการใน modal (staff + tech)
-        function renderStaffModalLists() {
-            const staffContainer = document.getElementById("staffListContainer");
-            const techContainer = document.getElementById("techListContainer");
-            if (!staffContainer || !techContainer) return;
-            staffContainer.innerHTML = "";
-            masterStaff.forEach(staff => {
-                const div = document.createElement("div");
-                div.className = "staff-list-item";
-                div.innerHTML = `
-                    <span class="staff-name"><i class="fas fa-user-circle me-2 text-primary"></i>${escapeHtml(staff)}</span>
-                    <div class="action-buttons">
-                        <button class="btn-icon edit-staff-btn" data-name="${escapeHtml(staff)}" title="แก้ไข"><i class="fas fa-edit text-warning"></i></button>
-                        <button class="btn-icon delete-staff-btn" data-name="${escapeHtml(staff)}" title="ลบ"><i class="fas fa-trash-alt text-danger"></i></button>
-                    </div>
-                `;
-                staffContainer.appendChild(div);
-            });
-            // attach events staff
-            document.querySelectorAll('.edit-staff-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const oldName = btn.getAttribute('data-name');
-                    Swal.fire({
-                        title: "แก้ไขชื่อพนักงาน",
-                        input: "text",
-                        inputValue: oldName,
-                        showCancelButton: true,
-                        confirmButtonText: "บันทึก",
-                        cancelButtonText: "ยกเลิก",
-                        preConfirm: (newName) => {
-                            if (!newName.trim()) { Swal.showValidationMessage("กรุณากรอกชื่อ"); return false; }
-                            if (newName.trim() === oldName) return true;
-                            editStaff(oldName, newName.trim());
-                            return true;
-                        }
-                    });
-                });
-            });
-            document.querySelectorAll('.delete-staff-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const name = btn.getAttribute('data-name');
-                    deleteStaff(name);
-                });
-            });
-
-            // ช่างผลิต
-            techContainer.innerHTML = "";
-            masterTech.forEach(tech => {
-                const div = document.createElement("div");
-                div.className = "staff-list-item";
-                div.innerHTML = `
-                    <span class="staff-name"><i class="fas fa-wrench me-2 text-success"></i>${escapeHtml(tech)}</span>
-                    <div class="action-buttons">
-                        <button class="btn-icon edit-tech-btn" data-name="${escapeHtml(tech)}" title="แก้ไข"><i class="fas fa-edit text-warning"></i></button>
-                        <button class="btn-icon delete-tech-btn" data-name="${escapeHtml(tech)}" title="ลบ"><i class="fas fa-trash-alt text-danger"></i></button>
-                    </div>
-                `;
-                techContainer.appendChild(div);
-            });
-            document.querySelectorAll('.edit-tech-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const oldName = btn.getAttribute('data-name');
-                    Swal.fire({
-                        title: "แก้ไขชื่อช่างผลิต",
-                        input: "text",
-                        inputValue: oldName,
-                        showCancelButton: true,
-                        confirmButtonText: "บันทึก",
-                        preConfirm: (newName) => {
-                            if (!newName.trim()) return false;
-                            editTech(oldName, newName.trim());
-                        }
-                    });
-                });
-            });
-            document.querySelectorAll('.delete-tech-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const name = btn.getAttribute('data-name');
-                    deleteTech(name);
-                });
-            });
+        function switchModalTab(type, btn) {
+            document.querySelectorAll('.modal-tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.modal-tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('modal-panel-' + type).classList.add('active');
         }
 
-        function escapeHtml(str) {
-            return str.replace(/[&<>]/g, function (m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            });
-        }
-
-        // ---------- UI render ทั่วไป (staff grids) ----------
-        function renderStaffGrid(containerId, staffList, selectedSet) {
+        // ========== MAIN UI ==========
+        function renderStaffGridSimple(containerId, items, selectedSet) {
             const container = document.getElementById(containerId);
             if (!container) return;
-            container.innerHTML = "";
-            staffList.forEach(name => {
+            container.innerHTML = '';
+            items.forEach(name => {
                 const chip = document.createElement('div');
                 chip.className = `staff-chip ${selectedSet.has(name) ? 'active' : ''}`;
-                chip.innerHTML = `<span>${escapeHtml(name)}</span><i class="fas ${selectedSet.has(name) ? 'fa-check-circle' : 'fa-plus-circle'}"></i>`;
+                chip.innerHTML = `<span>${escapeHtml(name)}</span><i class="fas ${selectedSet.has(name) ? 'fa-circle-check' : 'fa-circle-plus'}"></i>`;
                 chip.addEventListener('click', () => {
                     if (selectedSet.has(name)) selectedSet.delete(name);
                     else selectedSet.add(name);
-                    renderStaffGrid(containerId, staffList, selectedSet);
+                    refreshAllUI();
                 });
                 container.appendChild(chip);
             });
         }
 
-        function refreshUI() {
-            const isNormal = currentDayType === "normal";
-            document.getElementById("normalSection").style.display = isNormal ? "block" : "none";
-            document.getElementById("sundaySection").style.display = isNormal ? "none" : "block";
-            if (isNormal) {
-                renderStaffGrid("otOutList", masterStaff, selectedOtOut);
-                renderStaffGrid("otWorkList", masterStaff, selectedOtWork);
-            } else {
-                renderStaffGrid("sundayStaffList", masterStaff, selectedSundayStaff);
-                renderStaffGrid("technicianList", masterTech, selectedTech);
+        function renderDynamicGrid(containerId, personList, selectedSet) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = '';
+            personList.forEach(p => {
+                const chip = document.createElement('div');
+                chip.className = `staff-chip ${selectedSet.has(p.name) ? 'active' : ''}`;
+                chip.innerHTML = `<span>${escapeHtml(p.name)}</span><span class="badge-type">${p.type}</span><i class="fas ${selectedSet.has(p.name) ? 'fa-circle-check' : 'fa-circle-plus'}"></i>`;
+                chip.addEventListener('click', () => {
+                    if (selectedSet.has(p.name)) selectedSet.delete(p.name);
+                    else selectedSet.add(p.name);
+                    renderDynamicGrid(containerId, personList, selectedSet);
+                });
+                container.appendChild(chip);
+            });
+        }
+
+        function renderOtNewSections() {
+            renderStaffGridSimple("otNewProdList", masterProd, selectedOtNewSet);
+            renderStaffGridSimple("otNewTechList", masterTech, selectedOtNewSet);
+            renderStaffGridSimple("otNewQcList",   masterQc,   selectedOtNewSet);
+        }
+
+        function refreshAllUI() {
+            const reportType = document.getElementById("reportTypeSelect").value;
+            document.getElementById("otNormalSection").style.display       = (reportType === "ot_normal" || reportType === "ot_sunday") ? "block" : "none";
+            document.getElementById("reportAttendanceSection").style.display = (reportType === "report_attendance") ? "block" : "none";
+            document.getElementById("reportOtNewSection").style.display      = (reportType === "report_ot_new") ? "block" : "none";
+
+            if (reportType === "ot_normal") {
+                document.getElementById("normalSection").style.display  = "block";
+                document.getElementById("sundaySection").style.display  = "none";
+                renderStaffGridSimple("otOutList",  masterProd, selectedOtOut);
+                renderStaffGridSimple("otWorkList", masterProd, selectedOtWork);
+            } else if (reportType === "ot_sunday") {
+                document.getElementById("normalSection").style.display  = "none";
+                document.getElementById("sundaySection").style.display  = "block";
+                renderStaffGridSimple("sundayStaffList", masterProd, selectedSundayStaff);
+                renderStaffGridSimple("technicianList",  masterTech, selectedTechSunday);
+            } else if (reportType === "report_attendance") {
+                renderDynamicGrid("sickStaffList",          getAllPersonnel(), selectedSickSet);
+                renderDynamicGrid("personalLeaveStaffList", getAllPersonnel(), selectedPersonalLeaveSet);
+            } else if (reportType === "report_ot_new") {
+                renderOtNewSections();
             }
         }
 
-        // ---------- ฟังก์ชันอื่นๆ (วัน, generate, copy) ----------
-        let currentDayType = "normal";
-        function setDayType(type) {
-            currentDayType = type;
-            document.querySelectorAll('.toggle-option').forEach(opt => {
-                if (opt.getAttribute('data-value') === type) opt.classList.add('active');
-                else opt.classList.remove('active');
-            });
-            refreshUI();
-        }
-        function formatDateToThai(dateStr) {
+        // ========== REPORT GENERATION ==========
+        function formatDateThai(dateStr) {
             if (!dateStr) return "";
             const d = new Date(dateStr);
-            if (isNaN(d.getTime())) return "";
-            const day = String(d.getDate()).padStart(2, '0');
-            const month = String(d.getMonth() + 1).padStart(2, '0');
-            const yearBE = d.getFullYear() + 543;
-            return `${day}/${month}/${String(yearBE).slice(-2)}`;
+            if (isNaN(d)) return "";
+            return `${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')}/${d.getFullYear()+543}`;
         }
-        function generateOTText() {
-            const shift = document.getElementById('shift').value;
-            const dateText = formatDateToThai(document.getElementById('date').value);
-            let output = "";
-            if (currentDayType === "sunday") {
-                output += `OT วันอาทิตย์ ${shift}\n`;
-                let index = 1;
-                if (selectedSundayStaff.size) {
-                    output += "พนักงาน\n";
-                    for (let name of selectedSundayStaff) output += `${index++}.${name}\n`;
-                }
-                if (selectedTech.size) {
-                    output += "ช่างผลิต\n";
-                    for (let name of selectedTech) output += `${index++}.${name}\n`;
-                }
-                if (!selectedSundayStaff.size && !selectedTech.size) output += "ไม่มีรายชื่อพนักงานค่ะ";
-            } else {
-                output += `${dateText} ${shift}\n`;
-                if (!selectedOtOut.size) output += `ไม่มีพนักงานออก OT ค่ะ\n`;
-                else {
-                    output += `พนักงานออก OT ${selectedOtOut.size} คน ค่ะ\n`;
-                    let idx = 1;
-                    for (let name of selectedOtOut) output += `${idx++}.${name}\n`;
-                }
-                if (selectedOtWork.size) {
-                    output += "OT พับถุง\n";
-                    let idx = 1;
-                    for (let name of selectedOtWork) output += `${idx++}.${name}\n`;
-                }
+
+        function getCountByTypeFromSet(personSet, type) {
+            return getAllPersonnel().filter(p => personSet.has(p.name) && p.type === type).length;
+        }
+
+        function generateReport() {
+            const type      = document.getElementById("reportTypeSelect").value;
+            const shift     = document.getElementById("shift").value;
+            const dateText  = formatDateThai(document.getElementById("date").value);
+            const totalTech = masterTech.length;
+            const totalProd = masterProd.length;
+            const totalQc   = masterQc.length;
+            const totalAll  = totalTech + totalProd + totalQc;
+
+            if (type === "ot_normal") {
+                let out = `${dateText} ${shift}\n`;
+                if (!selectedOtOut.size) out += `ไม่มีพนักงานออก OT ค่ะ\n`;
+                else { out += `พนักงานออก OT ${selectedOtOut.size} คน ค่ะ\n`; let i=1; for(let n of selectedOtOut) out+=`${i++}.${n}\n`; }
+                if (selectedOtWork.size) { out += "OT พับถุง\n"; let i=1; for(let n of selectedOtWork) out+=`${i++}.${n}\n`; }
+                return out.trim();
             }
-            return output.trim();
+            else if (type === "ot_sunday") {
+                let out = `OT วันอาทิตย์ ${shift}\n`; let idx=1;
+                if (selectedSundayStaff.size) { out += "พนักงาน\n"; for(let n of selectedSundayStaff) out+=`${idx++}.${n}\n`; }
+                if (selectedTechSunday.size)  { out += "ช่างผลิต\n"; for(let n of selectedTechSunday)  out+=`${idx++}.${n}\n`; }
+                if (!selectedSundayStaff.size && !selectedTechSunday.size) out += "ไม่มีรายชื่อพนักงานค่ะ";
+                return out;
+            }
+            else if (type === "report_attendance") {
+                // รวม set ลาป่วย + ลากิจ เพื่อคำนวณจำนวนคนขาด
+                const combinedAbsent = new Set([...selectedSickSet, ...selectedPersonalLeaveSet]);
+                const absentTech = getCountByTypeFromSet(combinedAbsent, "ช่าง");
+                const absentProd = getCountByTypeFromSet(combinedAbsent, "ผลิต");
+                const absentQc   = getCountByTypeFromSet(combinedAbsent, "QC");
+                const presentTech = totalTech - absentTech;
+                const presentProd = totalProd - absentProd;
+                const presentQc   = totalQc   - absentQc;
+                const totalPresent = presentTech + presentProd + presentQc;
+                let output = `รายงานการมาปฎิบัติงาน \nวันที่  ${dateText}\nพนักงาน${shift}\n\n`;
+                output += `ช่าง   ${presentTech} คน\nผลิต ${presentProd} คน\nQC    ${presentQc} คน\nรวม ${totalPresent}/${totalAll} คน\n\n`;
+                if (selectedSickSet.size) { for(let name of selectedSickSet) output+=`${name} ลาป่วย\n`; }
+                if (selectedPersonalLeaveSet.size) { for(let name of selectedPersonalLeaveSet) output+=`${name} ลากิจ\n`; }
+                if (!selectedSickSet.size && !selectedPersonalLeaveSet.size) output += "ไม่มีผู้ลาป่วย/ลากิจ";
+                return output;
+            }
+            else {
+                const otOutTech = getCountByTypeFromSet(selectedOtNewSet, "ช่าง");
+                const otOutProd = getCountByTypeFromSet(selectedOtNewSet, "ผลิต");
+                const otOutQc   = getCountByTypeFromSet(selectedOtNewSet, "QC");
+                const presentTech = totalTech - otOutTech;
+                const presentProd = totalProd - otOutProd;
+                const presentQc   = totalQc   - otOutQc;
+                const totalPresent = presentTech + presentProd + presentQc;
+                let output = `รายงานการทำ OT\nวันที่  ${dateText}\nพนักงาน${shift}\n\n`;
+                output += `ช่าง   ${presentTech} คน\nผลิต ${presentProd} คน\nQC    ${presentQc} คน\nรวม ${totalPresent}/${totalAll} คน\n\n`;
+                if (selectedOtNewSet.size === 0) output += `ไม่มีรายชื่อออก OT`;
+                else { for(let name of selectedOtNewSet) output+=`${name} ออก OT\n`; }
+                return output;
+            }
         }
+
         async function generateAndCopy() {
-            const text = generateOTText();
-            const resultArea = document.getElementById('result');
-            resultArea.value = text;
+            const text = generateReport();
+            document.getElementById('result').value = text;
             try {
                 await navigator.clipboard.writeText(text);
                 const badge = document.getElementById('copyBadge');
                 badge.classList.remove('d-none');
                 setTimeout(() => badge.classList.add('d-none'), 1800);
-                Swal.fire({ icon: 'success', title: 'คัดลอกสำเร็จ!', text: 'ข้อความพร้อมส่งแล้ว', timer: 1500, showConfirmButton: false });
-            } catch {
-                Swal.fire('เกิดข้อผิดพลาด', 'กรุณาลองอีกครั้ง', 'error');
-            }
+                Swal.fire({ icon:'success', title:'คัดลอกสำเร็จ!', timer:1500, showConfirmButton:false });
+            } catch { Swal.fire('เกิดข้อผิดพลาด','','error'); }
         }
 
-        // ----- initialization -----
-        function setDefaultDate() {
-            const today = new Date();
-            const yyyy = today.getFullYear();
-            const mm = String(today.getMonth() + 1).padStart(2, '0');
-            const dd = String(today.getDate()).padStart(2, '0');
-            document.getElementById('date').value = `${yyyy}-${mm}-${dd}`;
-        }
-        function setCurrentYear() {
-            const yearSpan = document.getElementById('currentYear');
-            if (yearSpan) yearSpan.innerText = new Date().getFullYear();
-        }
-
-        // splash screen
+        function setDefaultDate() { document.getElementById('date').value = new Date().toISOString().slice(0,10); }
+        function setCurrentYear()  { document.getElementById('currentYear').innerText = new Date().getFullYear(); }
         function hideSplash() {
-            const splash = document.getElementById('splashScreen');
-            if (splash) { splash.classList.add('hide'); setTimeout(() => splash.style.display = 'none', 500); }
+            const s = document.getElementById('splashScreen');
+            if (s) { s.classList.add('hide'); setTimeout(() => s.style.display='none', 500); }
         }
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;');
+        }
+
         window.addEventListener('load', () => {
             loadStaffData();
             setDefaultDate();
             setCurrentYear();
-            refreshUI();
-            // event toggle
-            document.querySelectorAll('.toggle-option').forEach(btn => {
-                btn.addEventListener('click', () => setDayType(btn.getAttribute('data-value')));
-            });
+            renderAllModalLists();
+            refreshAllUI();
+
             document.getElementById('generateBtn').addEventListener('click', generateAndCopy);
-            // modal add events
-            document.getElementById('addStaffBtn').addEventListener('click', () => {
-                const input = document.getElementById('newStaffName');
-                if (input.value.trim()) addStaff(input.value.trim());
-                input.value = '';
+            document.getElementById('reportTypeSelect').addEventListener('change', () => refreshAllUI());
+
+            document.getElementById('addProdBtn')?.addEventListener('click', addProdModal);
+            document.getElementById('addTechBtn')?.addEventListener('click', addTechModal);
+            document.getElementById('addQcBtn')?.addEventListener('click',   addQcModal);
+
+            document.querySelectorAll('.toggle-option').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const type = btn.getAttribute('data-value');
+                    document.getElementById("normalSection").style.display = type==='normal' ? 'block' : 'none';
+                    document.getElementById("sundaySection").style.display = type==='sunday' ? 'block' : 'none';
+                    document.querySelectorAll('.toggle-option').forEach(o => o.classList.remove('active'));
+                    btn.classList.add('active');
+                });
             });
-            document.getElementById('addTechBtn').addEventListener('click', () => {
-                const input = document.getElementById('newTechName');
-                if (input.value.trim()) addTech(input.value.trim());
-                input.value = '';
-            });
-            // pre render modal lists
-            renderStaffModalLists();
+
             hideSplash();
         });
-        // ถ้า splash เกิน
-        setTimeout(() => { if (document.getElementById('splashScreen').style.display !== 'none') hideSplash(); }, 2500);
+
+        setTimeout(() => {
+            if (document.getElementById('splashScreen')?.style.display !== 'none') hideSplash();
+        }, 2000);
     </script>
 </body>
-
 </html>
