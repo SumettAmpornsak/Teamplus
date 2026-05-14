@@ -160,20 +160,98 @@
         }
 
         .btn-generate {
+            position: relative;
+            overflow: visible;
             background: linear-gradient(105deg, #3b82f6 0%, #2563eb 100%);
             border: none;
             border-radius: 48px;
-            padding: 14px;
+            padding: 14px 24px;
             font-weight: 600;
             font-size: 1rem;
             color: white;
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
-            transition: transform 0.1s;
             font-family: 'Kanit', sans-serif;
+
+            transition: all 0.35s ease;
+            z-index: 1;
         }
 
+        /* ขอบ RGB */
+        .btn-generate::before {
+            content: '';
+            position: absolute;
+
+            /* ยิ่งติดลบเยอะ = ขอบใหญ่ */
+            inset: -3px;
+
+            border-radius: 20px;
+
+            background: linear-gradient(90deg,
+                    #3b82f6,
+                    #3bdaf6,
+                    #3bf6ce,
+                    #793bf6,
+                    #bb3bf6,
+                    #da3bf6,
+                    #f63bce,
+                    #f63b8c,
+                    #3b82f6);
+
+            background-size: 400% 400%;
+
+            animation: rainbow-border 30s linear infinite;
+
+            z-index: -2;
+
+            /* ความฟุ้ง */
+            filter: blur(7px);
+            box-shadow:
+                0 0 15px rgba(59, 130, 246, 0.6),
+                0 0 35px rgba(59, 130, 246, 0.45),
+                0 0 55px rgba(123, 59, 246, 0.35);
+
+            opacity: 1;
+        }
+
+        /* ชั้นในเพื่อกันสีรุ้งทับปุ่ม */
+        .btn-generate::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 48px;
+            background: linear-gradient(105deg, #3b82f6 0%, #2563eb 100%);
+            z-index: -1;
+        }
+
+        /* Hover แล้วหยุด */
+        .btn-generate:hover::before,
+        .btn-generate:active::before {
+            opacity: 0;
+            animation: none;
+            transition: 0.3s;
+        }
+
+        /* Hover effect */
+        .btn-generate:hover {
+            transform: translateY(-2px);
+            box-shadow:
+                0 10px 25px rgba(59, 130, 246, 0.45),
+                0 0 30px rgba(59, 130, 246, 0.35);
+        }
+
+        /* Active */
         .btn-generate:active {
-            transform: scale(0.97);
+            transform: scale(0.98);
+        }
+
+        /* Animation */
+        @keyframes rainbow-border {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 400% 50%;
+            }
         }
 
         .result-area {
@@ -184,7 +262,7 @@
             border-radius: 10px;
             padding: 20px;
             border: none;
-            height: 40vh;
+            height: 20vh;
             resize: vertical;
         }
 
@@ -210,9 +288,9 @@
 
         .result-area::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg,
-                    #60a5fa,
-                    #f6c55c,
-                    #50ec48);
+                    #3b82f6,
+                    #efb63a,
+                    #49f141);
 
             border-radius: 10px;
         }
