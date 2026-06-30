@@ -12,8 +12,6 @@
         href="https://i.ibb.co/vMtPp3r/6cc55982f8941ab0f6e5ab9efd4617606d6df850cefeaaf4f58457fbaea4963a-0.png">
     <title>ทีมพลัส · Teamplus</title>
     <link rel="manifest" href="/manifest.json">
-    <link rel="apple-touch-icon"
-        href="https://i.ibb.co/vMtPp3r/6cc55982f8941ab0f6e5ab9efd4617606d6df850cefeaaf4f58457fbaea4963a-0.png">
     <meta name="description" content="ทีมพลัส Teamplus เว็บแอพจัดการพนักงาน OT และรายงานหลากหลายรูปแบบ" />
     <meta name="author" content="Sumett Ampornsak" />
     <link rel="icon"
@@ -21,98 +19,159 @@
         type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+        :root {
+            --bg-0: #f0f9ff;
+            --bg-1: #e6f0fa;
+            --surface: rgba(255, 255, 255, 0.92);
+            --surface-2: #ffffff;
+            --surface-3: #f8fafc;
+            --border: #e2e8f0;
+            --border-soft: #eef2ff;
+            --text: #1e293b;
+            --text-dim: #475569;
+            --text-faint: #94a3b8;
+            --accent: #3b82f6;
+            --accent-2: #2563eb;
+            --accent-soft: rgba(59, 130, 246, 0.12);
+            --danger: #dc2626;
+            --danger-soft: rgba(220, 38, 38, 0.08);
+            --success: #16a34a;
+            --warning: #d97706;
+            --radius-lg: 28px;
+            --radius-md: 18px;
+            --radius-sm: 14px;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             font-family: 'Kanit', sans-serif;
-            background: linear-gradient(145deg, #f0f9ff 0%, #e6f0fa 100%);
+            background: linear-gradient(145deg, var(--bg-0) 0%, var(--bg-1) 100%);
+            color: var(--text);
             min-height: 100vh;
-            padding: 16px 12px 12px 12px;
+            padding: 16px 12px 24px;
+        }
+
+        ::selection {
+            background: var(--accent-soft);
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 36px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: var(--surface);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .form-label {
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: #1e293b;
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: var(--text-dim);
             margin-bottom: 8px;
             display: flex;
             align-items: center;
             gap: 8px;
+            letter-spacing: 0.2px;
+        }
+
+        .form-label i {
+            color: var(--accent-2);
+            width: 16px;
+            text-align: center;
         }
 
         .form-control,
         .form-select {
-            border-radius: 28px;
-            border: 1px solid #e2e8f0;
-            padding: 12px 18px;
-            background: white;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            padding: 13px 16px;
+            background: var(--surface-2);
+            color: var(--text);
             font-size: 0.95rem;
             font-family: 'Kanit', sans-serif;
+            min-height: 48px;
         }
 
         .form-control:focus,
         .form-select:focus {
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
             outline: none;
+            background: var(--surface-3);
+            color: var(--text);
+        }
+
+        .form-select option {
+            background: #ffffff;
+            color: var(--text);
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            cursor: pointer;
+            opacity: 0.65;
         }
 
         .staff-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            background: #f8fafc;
-            border-radius: 28px;
-            padding: 16px;
+            gap: 9px;
+            background: rgba(164, 164, 164, 0.18);
+            border-radius: var(--radius-md);
+            padding: 14px;
             margin-top: 6px;
-            border: 1px solid #eef2ff;
+            border: 1px solid var(--border-soft);
             max-height: 280px;
             overflow-y: auto;
         }
 
+        .staff-grid:empty::after {
+            content: 'ยังไม่มีรายชื่อ — กดปุ่ม "จัดการพนักงาน" เพื่อเพิ่ม';
+            color: var(--text-faint);
+            font-size: 0.82rem;
+            padding: 6px 2px;
+        }
+
         .staff-chip {
-            background: white;
+            background: var(--surface-2);
             border-radius: 40px;
-            padding: 8px 18px;
+            padding: 9px 16px;
             font-size: 0.85rem;
             font-weight: 500;
-            color: #1f2937;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            border: 1px solid #e2e8f0;
+            color: var(--text);
+            border: 1px solid var(--border);
             cursor: pointer;
             user-select: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.2s ease;
+            transition: all 0.15s ease;
+            min-height: 38px;
+        }
+
+        .staff-chip:active {
+            transform: scale(0.96);
         }
 
         .staff-chip i {
             font-size: 0.8rem;
-            color: #94a3b8;
+            color: var(--text-faint);
         }
 
         .staff-chip.active {
-            background: #3b82f6;
-            border-color: #3b82f6;
+            background: linear-gradient(135deg, var(--accent), #2563eb);
+            border-color: var(--accent);
             color: white;
-            box-shadow: 0 6px 12px rgba(59, 130, 246, 0.25);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
         }
 
         .staff-chip.active i {
@@ -120,182 +179,142 @@
         }
 
         .badge-type {
-            font-size: 0.7rem;
-            background: #e2e8f0;
+            font-size: 0.68rem;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 20px;
-            padding: 2px 8px;
-            margin-left: 6px;
+            padding: 2px 9px;
+            color: var(--text-dim);
         }
 
         .staff-chip.active .badge-type {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.25);
             color: white;
         }
 
         .toggle-group {
-            background: #f1f5f9;
+            background: rgba(0, 0, 0, 0.22);
             border-radius: 48px;
             padding: 4px;
             display: flex;
-            gap: 8px;
+            gap: 6px;
             margin-bottom: 20px;
+            border: 1px solid var(--border-soft);
         }
 
         .toggle-option {
             flex: 1;
             text-align: center;
-            padding: 10px 0;
+            padding: 11px 0;
             border-radius: 40px;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 500;
+            font-size: 0.88rem;
             cursor: pointer;
-            color: #475569;
+            color: var(--text-dim);
             transition: all 0.2s;
         }
 
         .toggle-option.active {
-            background: white;
-            color: #3b82f6;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            background: var(--surface-3);
+            color: var(--accent-2);
         }
 
         .btn-generate {
             position: relative;
-            overflow: visible;
             background: linear-gradient(105deg, #3b82f6 0%, #2563eb 100%);
             border: none;
-            border-radius: 48px;
-            padding: 14px 24px;
+            border-radius: 40px;
+            padding: 16px 24px;
             font-weight: 600;
             font-size: 1rem;
             color: white;
             font-family: 'Kanit', sans-serif;
-            transition: all 0.35s ease;
-            z-index: 1;
-        }
-
-        .btn-generate::before {
-            content: '';
-            position: absolute;
-            inset: -5px;
-            border-radius: 30px;
-            background: linear-gradient(90deg,
-                    #1e3a8a,
-                    /* น้ำเงินเข้มมาก */
-                    #2563eb,
-                    /* น้ำเงินเข้ม */
-                    #3b82f6,
-                    /* สีหลักของคุณ */
-                    #60a5fa,
-                    /* น้ำเงินอ่อน */
-                    #93c5fd,
-                    /* ฟ้าอ่อนมาก */
-                    #60a5fa,
-                    #3b82f6,
-                    #2563eb,
-                    #1e3a8a);
-            background-size: 400% 400%;
-            animation: rainbow-border 30s linear infinite;
-            z-index: -2;
-            filter: blur(5px);
-            box-shadow:
-                0 0 15px rgba(59, 130, 246, 0.6),
-                0 0 35px rgba(59, 130, 246, 0.45),
-                0 0 55px rgba(123, 59, 246, 0.35);
-            opacity: 1;
-        }
-
-        .btn-generate::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 48px;
-            background: linear-gradient(105deg, #3b82f6 0%, #2563eb 100%);
-            z-index: -1;
-        }
-
-        .btn-generate:hover::before,
-        .btn-generate:active::before {
-            opacity: 0;
-            animation: none;
-            transition: 0.3s;
+            transition: all 0.25s ease;
+            box-shadow: 0 14px 30px rgba(59, 130, 246, 0.32);
+            min-height: 54px;
         }
 
         .btn-generate:hover {
             transform: translateY(-2px);
-            box-shadow:
-                0 10px 25px rgba(59, 130, 246, 0.45),
-                0 0 30px rgba(59, 130, 246, 0.35);
+            box-shadow: 0 18px 36px rgba(59, 130, 246, 0.42);
         }
 
         .btn-generate:active {
             transform: scale(0.98);
         }
 
-        @keyframes rainbow-border {
-            0% {
-                background-position: 0% 50%;
-            }
+        .btn-manage {
+            background: var(--surface-2);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 40px;
+            padding: 11px 18px;
+            font-weight: 500;
+            font-size: 0.88rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.15s;
+            min-height: 44px;
+        }
 
-            100% {
-                background-position: 400% 50%;
-            }
+        .btn-manage:hover {
+            background: var(--surface-3);
+            border-color: var(--accent);
+            color: var(--accent-2);
+        }
+
+        .btn-manage i {
+            color: var(--accent-2);
         }
 
         .result-area {
-            background: #0f172a;
-            color: #e2e8f0;
+            background: rgb(0, 0, 0);
+            color: #cfe0ff;
             font-family: 'Kanit', sans-serif;
-            font-size: 1rem;
-            border-radius: 10px;
-            padding: 20px;
-            border: none;
-            height: 40vh;
+            font-size: 0.95rem;
+            border-radius: var(--radius-md);
+            padding: 18px;
+            border: 1px solid var(--border-soft);
+            height: 38vh;
             resize: vertical;
         }
 
         .result-area:focus {
             outline: none;
-            border-color: #4c01fa;
-            box-shadow:
-                0 0 0 4px rgba(75, 4, 243, 0.425),
-                0 10px 30px rgba(23, 180, 237, 0.623);
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-soft);
         }
 
         .result-area::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
 
         .result-area::-webkit-scrollbar-track {
-            background: rgba(66, 52, 255, 0.05);
-            border-radius: 10px;
+            background: transparent;
         }
 
         .result-area::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg,
-                    #3b82f6,
-                    #efb63a,
-                    #49f141);
+            background: var(--surface-3);
             border-radius: 10px;
         }
 
         .copy-badge {
             position: absolute;
-            right: 20px;
-            top: -12px;
-            background: #3b82f6;
+            right: 16px;
+            top: -14px;
+            background: var(--success);
             border-radius: 40px;
             padding: 5px 15px;
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: white;
+            color: #06281c;
         }
 
         .footer-enhanced {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(8px);
-            border-radius: 32px 32px 24px 24px;
-            border-top: 2px solid rgb(77, 141, 245);
+            background: var(--surface);
+            backdrop-filter: blur(16px);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-soft);
         }
 
         .badge-version {
@@ -310,7 +329,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(145deg, #e8f6f7 0%, #daddf0 100%);
+            background: linear-gradient(180deg, var(--bg-0) 0%, var(--bg-1) 100%);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -327,10 +346,23 @@
         }
 
         .splash-logo {
-            width: 120px;
+            width: 110px;
             height: auto;
-            margin-bottom: 20px;
+            border-radius: 28px;
+            margin-bottom: 18px;
             animation: pulse 1.2s infinite ease-in-out;
+        }
+
+        .splash-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .splash-sub {
+            font-size: 0.85rem;
+            color: var(--text-faint);
+            margin-top: 2px;
         }
 
         @keyframes pulse {
@@ -340,7 +372,7 @@
             }
 
             50% {
-                transform: scale(1.05);
+                transform: scale(1.04);
                 opacity: 1;
             }
 
@@ -353,13 +385,13 @@
         .spinner-wave {
             display: flex;
             gap: 5px;
-            margin-top: 30px;
+            margin-top: 26px;
         }
 
         .spinner-wave span {
-            width: 8px;
-            height: 8px;
-            background-color: #3b82f6;
+            width: 7px;
+            height: 7px;
+            background-color: var(--accent-2);
             border-radius: 50%;
             display: inline-block;
             animation: wave 1s infinite ease-in-out both;
@@ -388,27 +420,27 @@
             }
         }
 
-        @media (max-width: 480px) {
-            body {
-                padding: 12px 10px 12px;
-            }
-
-            .staff-chip {
-                padding: 6px 12px;
-                font-size: 0.75rem;
-            }
+        /* ========== MODAL REDESIGN (mobile-safe inline CRUD) ========== */
+        .staff-management-modal .modal-content {
+            border-radius: 26px;
+            background: #ffffff;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            color: var(--text);
         }
 
-        /* ========== MODAL REDESIGN ========== */
-        .staff-management-modal .modal-content {
-            border-radius: 28px;
-            background: white;
-            border: none;
-            overflow: hidden;
+        .staff-management-modal .modal-dialog {
+            margin: 10px;
+        }
+
+        @media (min-width: 576px) {
+            .staff-management-modal .modal-dialog {
+                margin: 1.75rem auto;
+            }
         }
 
         .modal-header-custom {
-            padding: 24px 24px 0;
+            padding: 20px 18px 0;
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
@@ -417,90 +449,123 @@
         .modal-title-group {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 13px;
         }
 
         .modal-icon-box {
-            width: 48px;
-            height: 48px;
-            background: #EEF2FF;
-            border-radius: 14px;
+            width: 44px;
+            height: 44px;
+            background: var(--accent-soft);
+            border-radius: 13px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             flex-shrink: 0;
-            color: #3b82f6;
+            color: var(--accent-2);
         }
 
         .modal-main-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
-            color: #0f172a;
+            color: var(--text);
             margin: 0;
         }
 
         .modal-sub-title {
-            font-size: 13px;
-            color: #64748b;
+            font-size: 12.5px;
+            color: var(--text-faint);
             margin-top: 2px;
         }
 
         .modal-close-btn {
-            width: 32px;
-            height: 32px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            border: 1px solid #e2e8f0;
-            background: transparent;
+            border: 1px solid var(--border);
+            background: var(--surface-2);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: #64748b;
-            font-size: 13px;
+            color: var(--text-dim);
+            font-size: 14px;
             flex-shrink: 0;
             transition: background 0.15s;
         }
 
         .modal-close-btn:hover {
-            background: #f1f5f9;
+            background: var(--surface-3);
+            color: var(--text);
+        }
+
+        .modal-shift-toggle {
+            display: flex;
+            gap: 6px;
+            background: rgba(158, 158, 158, 25%);
+            border-radius: 40px;
+            padding: 4px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border-soft);
+        }
+
+        .modal-shift-btn {
+            flex: 1;
+            text-align: center;
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-weight: 500;
+            font-size: 0.88rem;
+            cursor: pointer;
+            color: var(--text-dim);
+            transition: all 0.2s;
+            border: none;
+            background: transparent;
+            font-family: 'Kanit', sans-serif;
+            min-height: 42px;
+        }
+
+        .modal-shift-btn.active {
+            background: var(--surface-3);
+            color: var(--accent-2);
         }
 
         .modal-tab-bar {
             display: flex;
-            padding: 20px 24px 0;
-            border-bottom: 1px solid #e2e8f0;
-            margin-top: 20px;
-            gap: 0;
-            flex-wrap: wrap;
+            padding: 0 18px;
+            border-bottom: 1px solid var(--border-soft);
+            gap: 2px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .modal-tab-btn {
-            padding: 10px 18px;
-            font-size: 14px;
+            padding: 11px 14px;
+            font-size: 13.5px;
             font-weight: 500;
             cursor: pointer;
             border: none;
             background: transparent;
-            color: #64748b;
+            color: var(--text-faint);
             border-bottom: 2px solid transparent;
             margin-bottom: -1px;
             transition: all 0.15s;
             display: flex;
             align-items: center;
-            gap: 7px;
+            gap: 6px;
             white-space: nowrap;
             font-family: 'Kanit', sans-serif;
+            min-height: 44px;
         }
 
         .modal-tab-btn.active {
-            color: #3b82f6;
-            border-bottom-color: #3b82f6;
+            color: var(--accent-2);
+            border-bottom-color: var(--accent);
         }
 
         .modal-tab-count {
-            background: #EFF6FF;
-            color: #3b82f6;
+            background: var(--surface-2);
+            color: var(--text-dim);
             font-size: 11px;
             font-weight: 500;
             border-radius: 20px;
@@ -510,55 +575,49 @@
         }
 
         .modal-tab-btn.active .modal-tab-count {
-            background: #DBEAFE;
+            background: var(--accent-soft);
+            color: var(--accent-2);
         }
 
         .modal-body-custom {
-            padding: 20px 24px;
+            padding: 16px 18px 18px;
         }
 
         .staff-modern-list {
             display: flex;
             flex-direction: column;
             gap: 8px;
-            max-height: 240px;
+            max-height: 46vh;
             overflow-y: auto;
-            margin-bottom: 16px;
-            padding-right: 4px;
+            margin-bottom: 14px;
+            padding-right: 2px;
+            -webkit-overflow-scrolling: touch;
         }
 
         .staff-modern-list::-webkit-scrollbar {
             width: 4px;
         }
 
-        .staff-modern-list::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
         .staff-modern-list::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
+            background: var(--surface-3);
             border-radius: 4px;
         }
 
         .staff-modern-row {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 14px;
-            border-radius: 12px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
+            gap: 10px;
+            padding: 9px 10px 9px 12px;
+            border-radius: 14px;
+            background: var(--surface-2);
+            border: 1px solid var(--border-soft);
             transition: border-color 0.15s;
         }
 
-        .staff-modern-row:hover {
-            border-color: #cbd5e1;
-        }
-
         .staff-avatar-box {
-            width: 34px;
-            height: 34px;
-            border-radius: 10px;
+            width: 36px;
+            height: 36px;
+            border-radius: 11px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -567,103 +626,162 @@
         }
 
         .av-prod {
-            background: #DBEAFE;
-            color: #1D4ED8;
+            background: rgba(59, 130, 246, 0.18);
+            color: #8cb6ff;
         }
 
         .av-tech {
-            background: #D1FAE5;
-            color: #065F46;
+            background: rgba(52, 211, 153, 0.16);
+            color: #5fe0b4;
         }
 
         .av-qc {
-            background: #FEF3C7;
-            color: #92400E;
+            background: rgba(251, 191, 36, 0.16);
+            color: #ffcc5c;
         }
 
         .staff-modern-name {
             flex: 1;
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 500;
-            color: #1e293b;
+            color: var(--text);
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .action-btn-group {
             display: flex;
             gap: 6px;
+            flex-shrink: 0;
         }
 
         .action-icon-btn {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
-            background: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            border: 1px solid var(--border);
+            background: var(--surface-3);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            font-size: 12px;
-            color: #64748b;
+            font-size: 14px;
+            color: var(--text-dim);
             transition: all 0.15s;
+            touch-action: manipulation;
         }
 
+        .action-icon-btn:active {
+            transform: scale(0.93);
+        }
+
+        .action-icon-btn.edit:active,
         .action-icon-btn.edit:hover {
-            color: #D97706;
-            border-color: #FDE68A;
-            background: #FFFBEB;
+            color: var(--warning);
+            border-color: rgba(251, 191, 36, 0.4);
+            background: rgba(251, 191, 36, 0.12);
         }
 
+        .action-icon-btn.del:active,
         .action-icon-btn.del:hover {
-            color: #DC2626;
-            border-color: #FECACA;
-            background: #FEF2F2;
+            color: var(--danger);
+            border-color: rgba(245, 102, 122, 0.4);
+            background: var(--danger-soft);
+        }
+
+        .action-icon-btn.confirm-ok {
+            color: var(--success);
+            border-color: rgba(52, 211, 153, 0.4);
+            background: rgba(52, 211, 153, 0.14);
+        }
+
+        .action-icon-btn.confirm-cancel {
+            color: var(--text-dim);
+        }
+
+        /* inline edit mode */
+        .staff-modern-row.editing {
+            background: rgba(59, 130, 246, 0.08);
+            border-color: rgba(59, 130, 246, 0.35);
+        }
+
+        .edit-name-input {
+            flex: 1;
+            min-width: 0;
+            background: var(--surface-3);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            color: var(--text);
+            font-family: 'Kanit', sans-serif;
+            font-size: 14.5px;
+            padding: 8px 10px;
+        }
+
+        .edit-name-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px var(--accent-soft);
+        }
+
+        /* inline delete confirm mode */
+        .delete-confirm-text {
+            flex: 1;
+            font-size: 13.5px;
+            color: var(--text-dim);
+            min-width: 0;
+        }
+
+        .delete-confirm-text b {
+            color: var(--text);
         }
 
         .add-staff-row {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             align-items: center;
-            background: #f8fafc;
-            border: 1px dashed #cbd5e1;
-            border-radius: 14px;
-            padding: 10px 14px;
+            background: rgb(240 240 240);
+            border: 1px dashed var(--border);
+            border-radius: var(--radius-sm);
+            padding: 8px 8px 8px 14px;
             transition: all 0.15s;
         }
 
         .add-staff-row:focus-within {
-            border-color: #93C5FD;
+            border-color: var(--accent);
             border-style: solid;
-            background: white;
+            background: rgb(240 240 240);
         }
 
         .add-staff-icon {
             font-size: 14px;
-            color: #94a3b8;
+            color: var(--text-faint);
             flex-shrink: 0;
         }
 
         .add-staff-input {
             flex: 1;
+            min-width: 0;
             border: none;
             background: transparent;
-            font-size: 14px;
+            font-size: 14.5px;
             font-family: 'Kanit', sans-serif;
-            color: #1e293b;
+            color: var(--text);
             outline: none;
+            padding: 9px 0;
         }
 
         .add-staff-input::placeholder {
-            color: #94a3b8;
+            color: var(--text-faint);
         }
 
         .add-staff-btn {
-            background: #3b82f6;
+            background: var(--accent);
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 6px 14px;
-            font-size: 13px;
+            border-radius: 11px;
+            padding: 10px 16px;
+            font-size: 13.5px;
             font-weight: 500;
             cursor: pointer;
             font-family: 'Kanit', sans-serif;
@@ -671,16 +789,18 @@
             white-space: nowrap;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            min-height: 42px;
+            flex-shrink: 0;
         }
 
-        .add-staff-btn:hover {
-            background: #2563EB;
+        .add-staff-btn:active {
+            background: #2563eb;
         }
 
         .modal-footer-custom {
-            padding: 16px 24px 24px;
-            border-top: 1px solid #e2e8f0;
+            padding: 14px 18px 18px;
+            border-top: 1px solid var(--border-soft);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -689,8 +809,8 @@
         }
 
         .total-info {
-            font-size: 13px;
-            color: #64748b;
+            font-size: 12.5px;
+            color: var(--text-faint);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -698,16 +818,16 @@
 
         .total-info .num {
             font-weight: 600;
-            color: #1e293b;
+            color: var(--text);
         }
 
         .done-modal-btn {
-            background: #3b82f6;
-            color: white;
-            border: none;
+            background: var(--surface-3);
+            color: var(--text);
+            border: 1px solid var(--border);
             border-radius: 40px;
-            padding: 10px 28px;
-            font-size: 14px;
+            padding: 11px 24px;
+            font-size: 13.5px;
             font-weight: 500;
             cursor: pointer;
             font-family: 'Kanit', sans-serif;
@@ -715,10 +835,12 @@
             align-items: center;
             gap: 8px;
             transition: background 0.15s;
+            min-height: 44px;
         }
 
         .done-modal-btn:hover {
-            background: #2563EB;
+            background: var(--accent-soft);
+            color: var(--accent-2);
         }
 
         .modal-tab-panel {
@@ -731,68 +853,48 @@
 
         .empty-state-modal {
             text-align: center;
-            padding: 24px 0;
-            color: #94a3b8;
+            padding: 22px 0;
+            color: var(--text-faint);
             font-size: 13px;
         }
 
         .empty-state-modal i {
-            font-size: 28px;
+            font-size: 26px;
             display: block;
             margin-bottom: 8px;
             opacity: 0.5;
         }
 
-        /* shift toggle in modal */
-        .modal-shift-toggle {
-            display: flex;
-            gap: 8px;
-            background: #f1f5f9;
-            border-radius: 40px;
-            padding: 4px;
-            margin-bottom: 16px;
-        }
-
-        .modal-shift-btn {
-            flex: 1;
-            text-align: center;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            color: #475569;
-            transition: all 0.2s;
-            border: none;
-            background: transparent;
-            font-family: 'Kanit', sans-serif;
-        }
-
-        .modal-shift-btn.active {
-            background: white;
-            color: #3b82f6;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-
         .shift-badge {
             display: inline-block;
-            background: #e2e8f0;
+            background: var(--surface-2);
             border-radius: 20px;
             padding: 0 10px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: #475569;
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: var(--text-dim);
             margin-left: 6px;
+            border: 1px solid var(--border-soft);
         }
 
-        .staff-chip .shift-badge {
-            background: rgba(255, 255, 255, 0.25);
-            color: white;
+        .swal2-popup {
+            font-family: 'Kanit', sans-serif !important;
+            border-radius: 22px !important;
         }
 
-        .staff-chip:not(.active) .shift-badge {
-            background: #e2e8f0;
-            color: #475569;
+        @media (max-width: 480px) {
+            body {
+                padding: 14px 8px 22px;
+            }
+
+            .staff-chip {
+                padding: 8px 13px;
+                font-size: 0.78rem;
+            }
+
+            .glass-card {
+                border-radius: 22px;
+            }
         }
     </style>
 </head>
@@ -807,26 +909,25 @@
     </div>
 
     <div class="container px-0" style="max-width: 640px; margin: 0 auto;">
-        <div class="glass-card p-4">
+        <div class="glass-card p-3 p-sm-4">
             <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
                 <div class="d-flex align-items-center gap-3">
                     <div
-                        style="background: #3b82f6; width: 70px; height: 70px; border-radius: 35px; display: flex; align-items: center; justify-content: center;">
+                        style="background: #3b82f6; width: 58px; height: 58px; border-radius: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 22px rgba(59,130,246,0.35);">
                         <img src="https://i.ibb.co/vMtPp3r/6cc55982f8941ab0f6e5ab9efd4617606d6df850cefeaaf4f58457fbaea4963a-0.png"
-                            alt="" style="width: 100%; height: 100%; border-radius: 35px; object-fit: cover;">
+                            alt="" style="width: 100%; height: 100%; border-radius: 18px; object-fit: cover;">
                     </div>
                     <div>
-                        <h3 class="mb-0 fw-bold" style="color: #0f172a; font-size: 1.8rem;">ทีมพลัส</h3>
-                        <p class="text-secondary mb-0 small">ระบบจัดการพนักงาน และ OT อัจฉริยะ</p>
+                        <h3 class="mb-0 fw-semibold" style="color: var(--text); font-size: 1.45rem;">ทีมพลัส</h3>
+                        <p class="mb-0 small" style="color: var(--text-faint);">ระบบจัดการพนักงาน และ OT</p>
                     </div>
                 </div>
-                <button class="btn btn-outline-primary rounded-pill shadow-sm" data-bs-toggle="modal"
-                    data-bs-target="#staffManagementModal" style="border-radius: 40px; padding: 8px 16px;">
-                    <i class="fas fa-users-gear me-1"></i> จัดการพนักงาน
+                <button class="btn-manage" data-bs-toggle="modal" data-bs-target="#staffManagementModal">
+                    <i class="fas fa-users-gear"></i> จัดการพนักงาน
                 </button>
             </div>
 
-            <div class="mb-4">
+            <div class="mb-3">
                 <label class="form-label"><i class="fas fa-chart-line"></i> ประเภทรายงาน</label>
                 <select id="reportTypeSelect" class="form-select">
                     <option value="ot_normal">OT ปกติ (วันปกติ)</option>
@@ -836,16 +937,18 @@
                 </select>
             </div>
 
-            <div class="mb-3">
-                <label class="form-label"><i class="far fa-calendar-alt"></i> วันที่</label>
-                <input type="date" id="date" class="form-control">
-            </div>
-            <div class="mb-3">
-                <label class="form-label"><i class="fas fa-exchange-alt"></i> กะที่ปฏิบัติงาน</label>
-                <select id="shift" class="form-select">
-                    <option value="A">กะ A</option>
-                    <option value="B" selected>กะ B</option>
-                </select>
+            <div class="row g-3 mb-3">
+                <div class="col-6">
+                    <label class="form-label"><i class="far fa-calendar-alt"></i> วันที่</label>
+                    <input type="date" id="date" class="form-control">
+                </div>
+                <div class="col-6">
+                    <label class="form-label"><i class="fas fa-exchange-alt"></i> กะ</label>
+                    <select id="shift" class="form-select">
+                        <option value="A">กะ A</option>
+                        <option value="B" selected>กะ B</option>
+                    </select>
+                </div>
             </div>
 
             <!-- OT ปกติ -->
@@ -883,7 +986,7 @@
                 <div id="otNewQcList" class="staff-grid"></div>
             </div>
 
-            <button id="generateBtn" class="btn btn-generate w-100 mt-4">
+            <button id="generateBtn" class="btn-generate w-100 mt-4">
                 <i class="fas fa-wand-magic-sparkles me-2"></i> สร้างข้อความ + คัดลอก
             </button>
 
@@ -894,30 +997,27 @@
             </div>
         </div>
 
-        <footer class="footer-enhanced mt-4 pt-3 pb-3 px-3">
+        <footer class="footer-enhanced mt-3 pt-3 pb-3 px-3">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
-                <div class="text-center text-md-start small">
+                <div class="text-center text-md-start small" style="color: var(--text-faint);">
                     <i class="far fa-copyright me-1"></i> <span id="currentYear"></span>
-                    <a href="#" class="text-primary fw-semibold mx-1">Sumett Ampornsak</a>
+                    <span class="fw-semibold" style="color: var(--accent-2);">Sumett Ampornsak</span>
                     <span class="d-block d-sm-inline">All rights reserved.</span>
                 </div>
                 <div class="d-flex flex-wrap align-items-center justify-content-center gap-2">
                     <span class="badge-version badge rounded-pill px-3 py-2">
-                        <i class="fas fa-tag me-1"></i> เวอร์ชัน 13.0.0
+                        <i class="fas fa-tag me-1"></i> เวอร์ชัน 14.0.0
                     </span>
-                    <div class="text-muted small d-flex align-items-center gap-1 ms-md-2">
+                    <div class="small d-flex align-items-center gap-1 ms-md-2" style="color: var(--text-faint);">
                         <i class="fas fa-sync-alt fa-xs opacity-75"></i>
                         <span>อัปเดตล่าสุด: 30/06/69</span>
                     </div>
                 </div>
             </div>
-            <div class="text-center mt-2 opacity-50" style="font-size: 0.65rem;">
-                <i class="fas fa-heart" style="color: #3b82f6;"></i> Dev By Sumett Ampornsak
-            </div>
         </footer>
     </div>
 
-    <!-- MODAL จัดการพนักงาน (redesigned + dual shift) -->
+    <!-- MODAL จัดการพนักงาน (dark, mobile-safe, inline CRUD) -->
     <div class="modal fade staff-management-modal" id="staffManagementModal" data-bs-backdrop="static" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -940,7 +1040,7 @@
                 </div>
 
                 <!-- Shift toggle inside modal -->
-                <div style="padding: 16px 24px 0;">
+                <div style="padding: 16px 18px 0;">
                     <div class="modal-shift-toggle">
                         <button class="modal-shift-btn" data-shift="A" onclick="setModalShift('A')">
                             <i class="fas fa-sun me-1"></i> กะ A
@@ -1013,7 +1113,7 @@
                 <!-- Footer -->
                 <div class="modal-footer-custom">
                     <div class="total-info">
-                        <i class="fas fa-users" style="color:#3b82f6; font-size:14px;"></i>
+                        <i class="fas fa-users" style="color:var(--accent-2); font-size:14px;"></i>
                         รวมทั้งหมด <span class="num" id="total-all">0</span> คน
                     </div>
                     <button class="done-modal-btn" data-bs-dismiss="modal">
@@ -1035,18 +1135,11 @@
         // ============================================================
         //  DATA MODEL : รองรับ 2 กะ (A และ B)
         // ============================================================
-        // staffData = { A: { prod: [], tech: [], qc: [] }, B: { prod: [], tech: [], qc: [] } }
-        // selections = { A: { otOut, otWork, sundayStaff, techSunday, sick, personalLeave, otNew },
-        //                B: { ... } }
-        // แต่ละ Set เก็บชื่อพนักงาน
-        // ============================================================
-
         let staffData = {
             A: { prod: [], tech: [], qc: [] },
             B: { prod: [], tech: [], qc: [] }
         };
 
-        // selections ตามกะ
         let selections = {
             A: {
                 otOut: new Set(), otWork: new Set(), sundayStaff: new Set(), techSunday: new Set(), sick: new Set(),
@@ -1060,6 +1153,10 @@
 
         // modal กำลังจัดการกะไหน
         let modalShift = 'B';
+
+        // inline edit/delete state ต่อ type: { type: index } หรือ null
+        let editingState = { prod: null, tech: null, qc: null };
+        let deletingState = { prod: null, tech: null, qc: null };
 
         // ============================================================
         //  โหลด / บันทึก
@@ -1087,17 +1184,14 @@
                 } catch (e) { /* fallback */ }
             }
 
-            // fallback: โหลดแบบเก่า (ถ้ามี) แต่ถ้าไม่มีให้ใช้ default ใหม่
             const old = localStorage.getItem("teamplus_full_data");
             if (old) {
                 try {
                     const oldData = JSON.parse(old);
                     if (oldData.prod && oldData.tech && oldData.qc) {
-                        // ใช้เป็นกะ B
                         staffData.B.prod = oldData.prod || [];
                         staffData.B.tech = oldData.tech || [];
                         staffData.B.qc = oldData.qc || [];
-                        // กะ A ใช้ default ใหม่
                         staffData.A.prod = ["ปิญาพร", "น้ำฝน", "มุทิตา", "พัชรพร", "จันทร์ใส", "อุราพร", "วรัณญา", "สุณิสา", "วรภร", "ฉันทนา", "นฤมล"];
                         staffData.A.tech = ["เทวราช", "อิสระ"];
                         staffData.A.qc = ["ปาริฉัตร", "กมลพร"];
@@ -1107,7 +1201,6 @@
                 } catch (e) { /* ignore */ }
             }
 
-            // default ใหม่สำหรับทั้งสองกะ
             staffData.B.prod = ["ปิยนุช", "ศศิวิมล", "จงรัก", "ภาวิตา", "ณัฐธิดา", "สุพิชญา", "สิทธิศักดิ์", "นุชนารถ", "กรรณิกา"];
             staffData.B.tech = ["เสกสรร", "สุรศักดิ์"];
             staffData.B.qc = ["ปราชญาทิพย์", "ปาริฉัตร"];
@@ -1121,7 +1214,6 @@
 
         function saveStaffData() {
             localStorage.setItem("teamplus_full_data_v4", JSON.stringify(staffData));
-            // save selections
             const selSave = {};
             for (let s of ['A', 'B']) {
                 selSave[s] = {};
@@ -1133,15 +1225,12 @@
         }
 
         // ============================================================
-        //  Helper: get current shift from UI
+        //  Helpers
         // ============================================================
         function getCurrentShift() {
-            return document.getElementById('shift').value; // 'A' or 'B'
+            return document.getElementById('shift').value;
         }
 
-        // ============================================================
-        //  Helper: get staff list by shift & type
-        // ============================================================
         function getStaff(shift, type) {
             return staffData[shift] ? staffData[shift][type] || [] : [];
         }
@@ -1178,8 +1267,12 @@
             }
         }
 
+        function showToast(msg, icon) {
+            Swal.fire({ icon: icon || 'success', title: msg, timer: 1300, showConfirmButton: false });
+        }
+
         // ============================================================
-        //  MODAL: render lists (ตาม modalShift)
+        //  MODAL: render lists (ตาม modalShift) — inline edit/delete, ไม่มี modal ซ้อน modal
         // ============================================================
         const avClass = { prod: 'av-prod', tech: 'av-tech', qc: 'av-qc' };
         const avIcon = { prod: 'fa-person', tech: 'fa-wrench', qc: 'fa-eye' };
@@ -1190,28 +1283,167 @@
             const list = document.getElementById('modal-list-' + type);
             if (!list) return;
             list.innerHTML = '';
+
             if (!arr.length) {
                 list.innerHTML = `<div class="empty-state-modal"><i class="fas fa-inbox"></i>ยังไม่มีรายชื่อ</div>`;
             } else {
                 arr.forEach((name, i) => {
                     const row = document.createElement('div');
                     row.className = 'staff-modern-row';
-                    row.innerHTML = `
-                        <div class="staff-avatar-box ${avClass[type]}">
-                            <i class="fas ${avIcon[type]}"></i>
-                        </div>
-                        <div class="staff-modern-name">${escapeHtml(name)}</div>
-                        <div class="action-btn-group">
-                            <button class="action-icon-btn edit" title="แก้ไข" onclick="editModalStaff('${type}',${i})">
-                                <i class="fas fa-pen"></i>
-                            </button>
-                            <button class="action-icon-btn del" title="ลบ" onclick="deleteModalStaff('${type}',${i})">
-                                <i class="fas fa-trash-can"></i>
-                            </button>
-                        </div>`;
+
+                    if (editingState[type] === i) {
+                        // ----- inline edit mode -----
+                        row.classList.add('editing');
+                        const avatar = document.createElement('div');
+                        avatar.className = `staff-avatar-box ${avClass[type]}`;
+                        avatar.innerHTML = `<i class="fas ${avIcon[type]}"></i>`;
+
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.className = 'edit-name-input';
+                        input.value = name;
+
+                        const btnGroup = document.createElement('div');
+                        btnGroup.className = 'action-btn-group';
+
+                        const saveBtn = document.createElement('button');
+                        saveBtn.className = 'action-icon-btn confirm-ok';
+                        saveBtn.title = 'บันทึก';
+                        saveBtn.innerHTML = '<i class="fas fa-check"></i>';
+                        saveBtn.type = 'button';
+
+                        const cancelBtn = document.createElement('button');
+                        cancelBtn.className = 'action-icon-btn confirm-cancel';
+                        cancelBtn.title = 'ยกเลิก';
+                        cancelBtn.innerHTML = '<i class="fas fa-xmark"></i>';
+                        cancelBtn.type = 'button';
+
+                        const commitEdit = () => {
+                            const newName = input.value.trim();
+                            if (!newName) {
+                                input.style.borderColor = 'var(--danger)';
+                                return;
+                            }
+                            if (newName !== name && arr.includes(newName)) {
+                                input.style.borderColor = 'var(--danger)';
+                                return;
+                            }
+                            arr[i] = newName;
+                            updateNameInAllSets(shift, name, newName);
+                            saveStaffData();
+                            editingState[type] = null;
+                            renderModalList(type);
+                            refreshAllUI();
+                            showToast('บันทึกแล้ว');
+                        };
+
+                        saveBtn.addEventListener('click', commitEdit);
+                        input.addEventListener('keydown', (e) => {
+                            if (e.key === 'Enter') commitEdit();
+                            if (e.key === 'Escape') { editingState[type] = null; renderModalList(type); }
+                        });
+                        cancelBtn.addEventListener('click', () => {
+                            editingState[type] = null;
+                            renderModalList(type);
+                        });
+
+                        btnGroup.appendChild(saveBtn);
+                        btnGroup.appendChild(cancelBtn);
+                        row.appendChild(avatar);
+                        row.appendChild(input);
+                        row.appendChild(btnGroup);
+                        list.appendChild(row);
+                        // focus after insert
+                        setTimeout(() => { input.focus(); input.select(); }, 0);
+                        return;
+                    }
+
+                    if (deletingState[type] === i) {
+                        // ----- inline delete confirm mode -----
+                        row.classList.add('editing');
+                        const text = document.createElement('div');
+                        text.className = 'delete-confirm-text';
+                        text.innerHTML = `ลบ <b>${escapeHtml(name)}</b> ใช่ไหม?`;
+
+                        const btnGroup = document.createElement('div');
+                        btnGroup.className = 'action-btn-group';
+
+                        const okBtn = document.createElement('button');
+                        okBtn.className = 'action-icon-btn confirm-ok';
+                        okBtn.title = 'ยืนยันลบ';
+                        okBtn.innerHTML = '<i class="fas fa-check"></i>';
+                        okBtn.type = 'button';
+                        okBtn.addEventListener('click', () => {
+                            arr.splice(i, 1);
+                            removeNameFromAllSets(shift, name);
+                            saveStaffData();
+                            deletingState[type] = null;
+                            renderModalList(type);
+                            refreshAllUI();
+                            showToast('ลบสำเร็จ');
+                        });
+
+                        const cancelBtn = document.createElement('button');
+                        cancelBtn.className = 'action-icon-btn confirm-cancel';
+                        cancelBtn.title = 'ยกเลิก';
+                        cancelBtn.innerHTML = '<i class="fas fa-xmark"></i>';
+                        cancelBtn.type = 'button';
+                        cancelBtn.addEventListener('click', () => {
+                            deletingState[type] = null;
+                            renderModalList(type);
+                        });
+
+                        btnGroup.appendChild(okBtn);
+                        btnGroup.appendChild(cancelBtn);
+                        row.appendChild(text);
+                        row.appendChild(btnGroup);
+                        list.appendChild(row);
+                        return;
+                    }
+
+                    // ----- normal display row -----
+                    const avatar = document.createElement('div');
+                    avatar.className = `staff-avatar-box ${avClass[type]}`;
+                    avatar.innerHTML = `<i class="fas ${avIcon[type]}"></i>`;
+
+                    const nameEl = document.createElement('div');
+                    nameEl.className = 'staff-modern-name';
+                    nameEl.textContent = name;
+
+                    const btnGroup = document.createElement('div');
+                    btnGroup.className = 'action-btn-group';
+
+                    const editBtn = document.createElement('button');
+                    editBtn.className = 'action-icon-btn edit';
+                    editBtn.title = 'แก้ไข';
+                    editBtn.innerHTML = '<i class="fas fa-pen"></i>';
+                    editBtn.type = 'button';
+                    editBtn.addEventListener('click', () => {
+                        deletingState[type] = null;
+                        editingState[type] = i;
+                        renderModalList(type);
+                    });
+
+                    const delBtn = document.createElement('button');
+                    delBtn.className = 'action-icon-btn del';
+                    delBtn.title = 'ลบ';
+                    delBtn.innerHTML = '<i class="fas fa-trash-can"></i>';
+                    delBtn.type = 'button';
+                    delBtn.addEventListener('click', () => {
+                        editingState[type] = null;
+                        deletingState[type] = i;
+                        renderModalList(type);
+                    });
+
+                    btnGroup.appendChild(editBtn);
+                    btnGroup.appendChild(delBtn);
+                    row.appendChild(avatar);
+                    row.appendChild(nameEl);
+                    row.appendChild(btnGroup);
                     list.appendChild(row);
                 });
             }
+
             const cnt = document.getElementById('cnt-' + type);
             if (cnt) cnt.textContent = arr.length;
             updateModalTotal();
@@ -1223,7 +1455,6 @@
             const total = s.prod.length + s.tech.length + s.qc.length;
             const el = document.getElementById('total-all');
             if (el) el.textContent = total;
-            // update shift label
             const label = document.getElementById('modalShiftLabel');
             if (label) label.textContent = 'กะ ' + shift;
         }
@@ -1236,7 +1467,8 @@
 
         function setModalShift(shift) {
             modalShift = shift;
-            // update buttons
+            editingState = { prod: null, tech: null, qc: null };
+            deletingState = { prod: null, tech: null, qc: null };
             document.querySelectorAll('.modal-shift-btn').forEach(b => {
                 b.classList.toggle('active', b.dataset.shift === shift);
             });
@@ -1251,7 +1483,7 @@
         }
 
         // ============================================================
-        //  MODAL: add / edit / delete
+        //  MODAL: add
         // ============================================================
         function addModalStaff(type, inputId) {
             const shift = modalShift;
@@ -1259,7 +1491,7 @@
             const val = inp.value.trim();
             const arr = getStaff(shift, type);
             if (!val || arr.includes(val)) {
-                inp.style.outline = '2px solid #FCA5A5';
+                inp.style.outline = '2px solid var(--danger)';
                 setTimeout(() => inp.style.outline = '', 600);
                 return;
             }
@@ -1268,6 +1500,7 @@
             saveStaffData();
             renderModalList(type);
             refreshAllUI();
+            showToast('เพิ่มแล้ว');
         }
 
         function addProdModal() { addModalStaff('prod', 'newProdName'); }
@@ -1275,56 +1508,6 @@
         function addTechModal() { addModalStaff('tech', 'newTechName'); }
 
         function addQcModal() { addModalStaff('qc', 'newQcName'); }
-
-        function editModalStaff(type, idx) {
-            const shift = modalShift;
-            const arr = getStaff(shift, type);
-            const oldName = arr[idx];
-            Swal.fire({
-                title: 'แก้ไขชื่อ',
-                input: 'text',
-                inputValue: oldName,
-                confirmButtonText: 'บันทึก',
-                showCancelButton: true,
-                cancelButtonText: 'ยกเลิก',
-                preConfirm: (newName) => {
-                    if (!newName || !newName.trim()) { Swal.showValidationMessage('กรุณากรอกชื่อ'); return false; }
-                    return newName.trim();
-                }
-            }).then(res => {
-                if (res.isConfirmed && res.value && res.value !== oldName) {
-                    arr[idx] = res.value;
-                    updateNameInAllSets(shift, oldName, res.value);
-                    saveStaffData();
-                    renderModalList(type);
-                    refreshAllUI();
-                }
-            });
-        }
-
-        function deleteModalStaff(type, idx) {
-            const shift = modalShift;
-            const arr = getStaff(shift, type);
-            const name = arr[idx];
-            Swal.fire({
-                title: 'ยืนยันลบ?',
-                text: `ลบ "${name}" ออกจากรายชื่อ (กะ ${shift})`,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                confirmButtonText: 'ลบ',
-                cancelButtonText: 'ยกเลิก'
-            }).then(res => {
-                if (res.isConfirmed) {
-                    arr.splice(idx, 1);
-                    removeNameFromAllSets(shift, name);
-                    saveStaffData();
-                    renderModalList(type);
-                    refreshAllUI();
-                    Swal.fire({ icon: 'success', title: 'ลบสำเร็จ', timer: 1200, showConfirmButton: false });
-                }
-            });
-        }
 
         // ============================================================
         //  MAIN UI : render ตาม current shift
@@ -1405,9 +1588,6 @@
             } else if (reportType === "report_ot_new") {
                 renderOtNewSections(shift);
             }
-
-            // เปิด modal ครั้งต่อไปให้ sync กับ shift ปัจจุบัน
-            // แต่ถ้า modal เปิดอยู่แล้วไม่ auto change
         }
 
         // ============================================================
@@ -1466,7 +1646,6 @@
                 if (sel.personalLeave.size) { for (let name of sel.personalLeave) output += `${name} ลากิจ\n`; }
                 return output;
             } else {
-                // report_ot_new
                 const otOutTech = getCountByTypeFromSet(shift, sel.otNew, "ช่าง");
                 const otOutProd = getCountByTypeFromSet(shift, sel.otNew, "ผลิต");
                 const otOutQc = getCountByTypeFromSet(shift, sel.otNew, "QC");
@@ -1490,9 +1669,9 @@
                 const badge = document.getElementById('copyBadge');
                 badge.classList.remove('d-none');
                 setTimeout(() => badge.classList.add('d-none'), 1800);
-                Swal.fire({ icon: 'success', title: 'คัดลอกสำเร็จ!', timer: 1500, showConfirmButton: false });
+                showToast('คัดลอกสำเร็จ!');
             } catch {
-                Swal.fire('เกิดข้อผิดพลาด', '', 'error');
+                Swal.fire('เกิดข้อผิดพลาด', 'ไม่สามารถคัดลอกได้ ลองคัดลอกข้อความด้วยตัวเองค่ะ', 'error');
             }
         }
 
@@ -1522,7 +1701,6 @@
             loadStaffData();
             setDefaultDate();
             setCurrentYear();
-            // ตั้งค่า modal shift ตาม current shift
             modalShift = getCurrentShift();
             document.querySelectorAll('.modal-shift-btn').forEach(b => {
                 b.classList.toggle('active', b.dataset.shift === modalShift);
@@ -1533,8 +1711,6 @@
             document.getElementById('generateBtn').addEventListener('click', generateAndCopy);
             document.getElementById('reportTypeSelect').addEventListener('change', () => refreshAllUI());
             document.getElementById('shift').addEventListener('change', () => {
-                // เมื่อเปลี่ยนกะ在主界面，refresh UI
-                // และ sync modal shift ด้วย
                 modalShift = getCurrentShift();
                 document.querySelectorAll('.modal-shift-btn').forEach(b => {
                     b.classList.toggle('active', b.dataset.shift === modalShift);
@@ -1549,19 +1725,17 @@
             document.querySelectorAll('.toggle-option').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const type = btn.getAttribute('data-value');
-                    document.getElementById("normalSection").style.display = type === 'normal' ? 'block' :
-                        'none';
-                    document.getElementById("sundaySection").style.display = type === 'sunday' ? 'block' :
-                        'none';
-                    document.querySelectorAll('.toggle-option').forEach(o => o.classList.remove(
-                        'active'));
+                    document.getElementById("normalSection").style.display = type === 'normal' ? 'block' : 'none';
+                    document.getElementById("sundaySection").style.display = type === 'sunday' ? 'block' : 'none';
+                    document.querySelectorAll('.toggle-option').forEach(o => o.classList.remove('active'));
                     btn.classList.add('active');
                 });
             });
 
-            // เมื่อเปิด modal ให้ sync shift
             document.getElementById('staffManagementModal').addEventListener('show.bs.modal', function () {
                 modalShift = getCurrentShift();
+                editingState = { prod: null, tech: null, qc: null };
+                deletingState = { prod: null, tech: null, qc: null };
                 document.querySelectorAll('.modal-shift-btn').forEach(b => {
                     b.classList.toggle('active', b.dataset.shift === modalShift);
                 });
