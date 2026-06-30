@@ -1065,13 +1065,13 @@
         //  โหลด / บันทึก
         // ============================================================
         function loadStaffData() {
-            const stored = localStorage.getItem("teamplus_full_data_v3");
+            const stored = localStorage.getItem("teamplus_full_data_v4");
             if (stored) {
                 try {
                     const data = JSON.parse(stored);
                     if (data.A && data.B && data.A.prod && data.B.prod) {
                         staffData = data;
-                        const selStored = localStorage.getItem("teamplus_selections_v3");
+                        const selStored = localStorage.getItem("teamplus_selections_v4");
                         if (selStored) {
                             const sel = JSON.parse(selStored);
                             for (let s of ['A', 'B']) {
@@ -1108,13 +1108,13 @@
             }
 
             // default ใหม่สำหรับทั้งสองกะ
-            staffData.B.prod = ["ปิยนุช", "ศศิวิมล", "จงรัก", "ภาวิตา", "ณัฐธิดา", "สุพิชญา", "สิทธิศักดิ์", "นุชนารถ", "กรรณิกา"];
+            staffData.B.prod = ["ปิญาพร", "ศศิวิมล", "จงรัก", "ภาวิตา", "ณัฐธิดา", "สุพิชญา", "สิทธิศักดิ์", "นุชนารถ", "กรรณิกา"];
             staffData.B.tech = ["เสกสรร", "สุรศักดิ์"];
-            staffData.B.qc = ["ปราชญาทิพย์", "อารียา"];
+            staffData.B.qc = ["ปราชญาทิพย์", "ปาริฉัตร"];
 
-            staffData.A.prod = ["ปิญาพร", "น้ำฝน", "มุทิตา", "พัชรพร", "จันทร์ใส", "อุราพร", "วรัณญา", "สุณิสา", "วรภร", "ฉันทนา", "นฤมล"];
+            staffData.A.prod = ["ปิยนุช", "น้ำฝน", "มุทิตา", "พัชรพร", "จันทร์ใส", "อุราพร", "วรัณญา", "สุณิสา", "วรภร", "ฉันทนา", "นฤมล"];
             staffData.A.tech = ["เทวราช", "อิสระ"];
-            staffData.A.qc = ["ปาริฉัตร", "กมลพร"];
+            staffData.A.qc = ["อารียา", "กมลพร"];
 
             saveStaffData();
         }
@@ -1129,7 +1129,7 @@
                     selSave[s][key] = Array.from(selections[s][key]);
                 }
             }
-            localStorage.setItem("teamplus_selections_v3", JSON.stringify(selSave));
+            localStorage.setItem("teamplus_selections_v4", JSON.stringify(selSave));
         }
 
         // ============================================================
