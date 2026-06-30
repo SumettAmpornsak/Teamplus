@@ -170,49 +170,41 @@
             font-size: 1rem;
             color: white;
             font-family: 'Kanit', sans-serif;
-
             transition: all 0.35s ease;
             z-index: 1;
         }
 
-        /* ขอบ RGB */
         .btn-generate::before {
             content: '';
             position: absolute;
-
-            /* ยิ่งติดลบเยอะ = ขอบใหญ่ */
-            inset: -3px;
-
-            border-radius: 20px;
-
+            inset: -5px;
+            border-radius: 30px;
             background: linear-gradient(90deg,
+                    #1e3a8a,
+                    /* น้ำเงินเข้มมาก */
+                    #2563eb,
+                    /* น้ำเงินเข้ม */
                     #3b82f6,
-                    #3bdaf6,
-                    #3bf6ce,
-                    #793bf6,
-                    #bb3bf6,
-                    #da3bf6,
-                    #f63bce,
-                    #f63b8c,
-                    #3b82f6);
-
+                    /* สีหลักของคุณ */
+                    #60a5fa,
+                    /* น้ำเงินอ่อน */
+                    #93c5fd,
+                    /* ฟ้าอ่อนมาก */
+                    #60a5fa,
+                    #3b82f6,
+                    #2563eb,
+                    #1e3a8a);
             background-size: 400% 400%;
-
             animation: rainbow-border 30s linear infinite;
-
             z-index: -2;
-
-            /* ความฟุ้ง */
-            filter: blur(7px);
+            filter: blur(5px);
             box-shadow:
                 0 0 15px rgba(59, 130, 246, 0.6),
                 0 0 35px rgba(59, 130, 246, 0.45),
                 0 0 55px rgba(123, 59, 246, 0.35);
-
             opacity: 1;
         }
 
-        /* ชั้นในเพื่อกันสีรุ้งทับปุ่ม */
         .btn-generate::after {
             content: '';
             position: absolute;
@@ -222,7 +214,6 @@
             z-index: -1;
         }
 
-        /* Hover แล้วหยุด */
         .btn-generate:hover::before,
         .btn-generate:active::before {
             opacity: 0;
@@ -230,7 +221,6 @@
             transition: 0.3s;
         }
 
-        /* Hover effect */
         .btn-generate:hover {
             transform: translateY(-2px);
             box-shadow:
@@ -238,12 +228,10 @@
                 0 0 30px rgba(59, 130, 246, 0.35);
         }
 
-        /* Active */
         .btn-generate:active {
             transform: scale(0.98);
         }
 
-        /* Animation */
         @keyframes rainbow-border {
             0% {
                 background-position: 0% 50%;
@@ -262,21 +250,18 @@
             border-radius: 10px;
             padding: 20px;
             border: none;
-            height: 20vh;
+            height: 40vh;
             resize: vertical;
         }
 
-        /* ตอนกด */
         .result-area:focus {
             outline: none;
             border-color: #4c01fa;
-
             box-shadow:
                 0 0 0 4px rgba(75, 4, 243, 0.425),
                 0 10px 30px rgba(23, 180, 237, 0.623);
         }
 
-        /* Scrollbar */
         .result-area::-webkit-scrollbar {
             width: 10px;
         }
@@ -291,7 +276,6 @@
                     #3b82f6,
                     #efb63a,
                     #49f141);
-
             border-radius: 10px;
         }
 
@@ -488,6 +472,7 @@
             border-bottom: 1px solid #e2e8f0;
             margin-top: 20px;
             gap: 0;
+            flex-wrap: wrap;
         }
 
         .modal-tab-btn {
@@ -700,6 +685,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
+            flex-wrap: wrap;
         }
 
         .total-info {
@@ -756,6 +742,58 @@
             margin-bottom: 8px;
             opacity: 0.5;
         }
+
+        /* shift toggle in modal */
+        .modal-shift-toggle {
+            display: flex;
+            gap: 8px;
+            background: #f1f5f9;
+            border-radius: 40px;
+            padding: 4px;
+            margin-bottom: 16px;
+        }
+
+        .modal-shift-btn {
+            flex: 1;
+            text-align: center;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            color: #475569;
+            transition: all 0.2s;
+            border: none;
+            background: transparent;
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .modal-shift-btn.active {
+            background: white;
+            color: #3b82f6;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .shift-badge {
+            display: inline-block;
+            background: #e2e8f0;
+            border-radius: 20px;
+            padding: 0 10px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #475569;
+            margin-left: 6px;
+        }
+
+        .staff-chip .shift-badge {
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+        }
+
+        .staff-chip:not(.active) .shift-badge {
+            background: #e2e8f0;
+            color: #475569;
+        }
     </style>
 </head>
 
@@ -805,8 +843,8 @@
             <div class="mb-3">
                 <label class="form-label"><i class="fas fa-exchange-alt"></i> กะที่ปฏิบัติงาน</label>
                 <select id="shift" class="form-select">
-                    <option value="กะ A">กะ A</option>
-                    <option value="กะ B" selected>กะ B</option>
+                    <option value="A">กะ A</option>
+                    <option value="B" selected>กะ B</option>
                 </select>
             </div>
 
@@ -865,23 +903,21 @@
                 </div>
                 <div class="d-flex flex-wrap align-items-center justify-content-center gap-2">
                     <span class="badge-version badge rounded-pill px-3 py-2">
-                        <i class="fas fa-tag me-1"></i> เวอร์ชัน 11.0.0
+                        <i class="fas fa-tag me-1"></i> เวอร์ชัน 13.0.0
                     </span>
                     <div class="text-muted small d-flex align-items-center gap-1 ms-md-2">
                         <i class="fas fa-sync-alt fa-xs opacity-75"></i>
-                        <span>อัปเดตล่าสุด: 14/05/69</span>
+                        <span>อัปเดตล่าสุด: 30/06/69</span>
                     </div>
                 </div>
             </div>
             <div class="text-center mt-2 opacity-50" style="font-size: 0.65rem;">
                 <i class="fas fa-heart" style="color: #3b82f6;"></i> Dev By Sumett Ampornsak
             </div>
-    </div>
-    </div>
-    </footer>
+        </footer>
     </div>
 
-    <!-- MODAL จัดการพนักงาน (redesigned) -->
+    <!-- MODAL จัดการพนักงาน (redesigned + dual shift) -->
     <div class="modal fade staff-management-modal" id="staffManagementModal" data-bs-backdrop="static" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
@@ -894,12 +930,25 @@
                         </div>
                         <div>
                             <div class="modal-main-title">จัดการพนักงาน</div>
-                            <div class="modal-sub-title">เพิ่ม แก้ไข หรือลบรายชื่อพนักงาน</div>
+                            <div class="modal-sub-title">เพิ่ม แก้ไข หรือลบรายชื่อพนักงาน <span id="modalShiftLabel"
+                                    class="shift-badge">กะ B</span></div>
                         </div>
                     </div>
                     <button class="modal-close-btn" data-bs-dismiss="modal">
                         <i class="fas fa-xmark"></i>
                     </button>
+                </div>
+
+                <!-- Shift toggle inside modal -->
+                <div style="padding: 16px 24px 0;">
+                    <div class="modal-shift-toggle">
+                        <button class="modal-shift-btn" data-shift="A" onclick="setModalShift('A')">
+                            <i class="fas fa-sun me-1"></i> กะ A
+                        </button>
+                        <button class="modal-shift-btn active" data-shift="B" onclick="setModalShift('B')">
+                            <i class="fas fa-moon me-1"></i> กะ B
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Tabs -->
@@ -976,75 +1025,168 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js">
+    </script>
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(e => console.log(e)));
         }
 
-        // ========== ข้อมูลหลัก ==========
-        let masterProd = [];
-        let masterTech = [];
-        let masterQc = [];
+        // ============================================================
+        //  DATA MODEL : รองรับ 2 กะ (A และ B)
+        // ============================================================
+        // staffData = { A: { prod: [], tech: [], qc: [] }, B: { prod: [], tech: [], qc: [] } }
+        // selections = { A: { otOut, otWork, sundayStaff, techSunday, sick, personalLeave, otNew },
+        //                B: { ... } }
+        // แต่ละ Set เก็บชื่อพนักงาน
+        // ============================================================
 
-        let selectedOtOut = new Set();
-        let selectedOtWork = new Set();
-        let selectedSundayStaff = new Set();
-        let selectedTechSunday = new Set();
-        let selectedSickSet = new Set();
-        let selectedPersonalLeaveSet = new Set();
-        let selectedOtNewSet = new Set();
+        let staffData = {
+            A: { prod: [], tech: [], qc: [] },
+            B: { prod: [], tech: [], qc: [] }
+        };
 
-        // โหลด / บันทึก
+        // selections ตามกะ
+        let selections = {
+            A: {
+                otOut: new Set(), otWork: new Set(), sundayStaff: new Set(), techSunday: new Set(), sick: new Set(),
+                personalLeave: new Set(), otNew: new Set()
+            },
+            B: {
+                otOut: new Set(), otWork: new Set(), sundayStaff: new Set(), techSunday: new Set(), sick: new Set(),
+                personalLeave: new Set(), otNew: new Set()
+            }
+        };
+
+        // modal กำลังจัดการกะไหน
+        let modalShift = 'B';
+
+        // ============================================================
+        //  โหลด / บันทึก
+        // ============================================================
         function loadStaffData() {
-            const stored = localStorage.getItem("teamplus_full_data");
+            const stored = localStorage.getItem("teamplus_full_data_v3");
             if (stored) {
                 try {
                     const data = JSON.parse(stored);
-                    masterProd = data.prod || [];
-                    masterTech = data.tech || [];
-                    masterQc = data.qc || [];
-                } catch (e) { useDefaults(); }
-            } else { useDefaults(); }
-            if (!masterProd.length) masterProd = ["ปิยนุช", "ศศิวิมล", "จงรัก", "พิไลยพร", "ภาวิตา", "ณัฐธิดา", "สุพิชญา", "ภาณุ", "สิทธิศักดิ์", "นุชนารถ", "กรรณิกา"];
-            if (!masterTech.length) masterTech = ["เสกสรร", "สุรศักดิ์"];
-            if (!masterQc.length) masterQc = ["คนที่ 1", "คนที่ 2"];
-        }
+                    if (data.A && data.B && data.A.prod && data.B.prod) {
+                        staffData = data;
+                        const selStored = localStorage.getItem("teamplus_selections_v3");
+                        if (selStored) {
+                            const sel = JSON.parse(selStored);
+                            for (let s of ['A', 'B']) {
+                                for (let key of ['otOut', 'otWork', 'sundayStaff', 'techSunday', 'sick', 'personalLeave', 'otNew']) {
+                                    if (sel[s] && sel[s][key]) {
+                                        selections[s][key] = new Set(sel[s][key]);
+                                    }
+                                }
+                            }
+                        }
+                        return;
+                    }
+                } catch (e) { /* fallback */ }
+            }
 
-        function useDefaults() {
-            masterProd = ["ปิยนุช", "ศศิวิมล", "จงรัก", "พิไลยพร", "ภาวิตา", "ณัฐธิดา", "สุพิชญา", "ภาณุ", "สิทธิศักดิ์", "นุชนารถ", "กรรณิกา"];
-            masterTech = ["เสกสรร", "สุรศักดิ์"];
-            masterQc = ["คนที่ 1", "คนที่ 2"];
+            // fallback: โหลดแบบเก่า (ถ้ามี) แต่ถ้าไม่มีให้ใช้ default ใหม่
+            const old = localStorage.getItem("teamplus_full_data");
+            if (old) {
+                try {
+                    const oldData = JSON.parse(old);
+                    if (oldData.prod && oldData.tech && oldData.qc) {
+                        // ใช้เป็นกะ B
+                        staffData.B.prod = oldData.prod || [];
+                        staffData.B.tech = oldData.tech || [];
+                        staffData.B.qc = oldData.qc || [];
+                        // กะ A ใช้ default ใหม่
+                        staffData.A.prod = ["ปิญาพร", "น้ำฝน", "มุทิตา", "พัชรพร", "จันทร์ใส", "อุราพร", "วรัณญา", "สุณิสา", "วรภร", "ฉันทนา", "นฤมล"];
+                        staffData.A.tech = ["เทวราช", "อิสระ"];
+                        staffData.A.qc = ["ปาริฉัตร", "กมลพร"];
+                        saveStaffData();
+                        return;
+                    }
+                } catch (e) { /* ignore */ }
+            }
+
+            // default ใหม่สำหรับทั้งสองกะ
+            staffData.B.prod = ["ปิยนุช", "ศศิวิมล", "จงรัก", "ภาวิตา", "ณัฐธิดา", "สุพิชญา", "สิทธิศักดิ์", "นุชนารถ", "กรรณิกา"];
+            staffData.B.tech = ["เสกสรร", "สุรศักดิ์"];
+            staffData.B.qc = ["ปราชญาทิพย์", "อารียา"];
+
+            staffData.A.prod = ["ปิญาพร", "น้ำฝน", "มุทิตา", "พัชรพร", "จันทร์ใส", "อุราพร", "วรัณญา", "สุณิสา", "วรภร", "ฉันทนา", "นฤมล"];
+            staffData.A.tech = ["เทวราช", "อิสระ"];
+            staffData.A.qc = ["ปาริฉัตร", "กมลพร"];
+
+            saveStaffData();
         }
 
         function saveStaffData() {
-            localStorage.setItem("teamplus_full_data", JSON.stringify({ prod: masterProd, tech: masterTech, qc: masterQc }));
+            localStorage.setItem("teamplus_full_data_v3", JSON.stringify(staffData));
+            // save selections
+            const selSave = {};
+            for (let s of ['A', 'B']) {
+                selSave[s] = {};
+                for (let key of ['otOut', 'otWork', 'sundayStaff', 'techSunday', 'sick', 'personalLeave', 'otNew']) {
+                    selSave[s][key] = Array.from(selections[s][key]);
+                }
+            }
+            localStorage.setItem("teamplus_selections_v2", JSON.stringify(selSave));
         }
 
-        function getAllPersonnel() {
+        // ============================================================
+        //  Helper: get current shift from UI
+        // ============================================================
+        function getCurrentShift() {
+            return document.getElementById('shift').value; // 'A' or 'B'
+        }
+
+        // ============================================================
+        //  Helper: get staff list by shift & type
+        // ============================================================
+        function getStaff(shift, type) {
+            return staffData[shift] ? staffData[shift][type] || [] : [];
+        }
+
+        function getAllPersonnel(shift) {
+            const s = staffData[shift] || { prod: [], tech: [], qc: [] };
             let all = [];
-            masterProd.forEach(name => all.push({ name, type: "ผลิต" }));
-            masterTech.forEach(name => all.push({ name, type: "ช่าง" }));
-            masterQc.forEach(name => all.push({ name, type: "QC" }));
+            s.prod.forEach(name => all.push({ name, type: "ผลิต" }));
+            s.tech.forEach(name => all.push({ name, type: "ช่าง" }));
+            s.qc.forEach(name => all.push({ name, type: "QC" }));
             return all;
         }
 
-        function removeNameFromAllSets(name) {
-            [selectedOtOut, selectedOtWork, selectedSundayStaff, selectedTechSunday, selectedSickSet, selectedPersonalLeaveSet, selectedOtNewSet]
-                .forEach(s => s.delete(name));
+        function getCountByTypeFromSet(shift, personSet, type) {
+            const s = staffData[shift] || { prod: [], tech: [], qc: [] };
+            const list = type === 'ผลิต' ? s.prod : type === 'ช่าง' ? s.tech : s.qc;
+            return list.filter(name => personSet.has(name)).length;
         }
 
-        function updateNameInAllSets(oldName, newName) {
-            [selectedOtOut, selectedOtWork, selectedSundayStaff, selectedTechSunday, selectedSickSet, selectedPersonalLeaveSet, selectedOtNewSet]
-                .forEach(s => { if (s.has(oldName)) { s.delete(oldName); s.add(newName); } });
+        function removeNameFromAllSets(shift, name) {
+            const sel = selections[shift] || {};
+            for (let key of ['otOut', 'otWork', 'sundayStaff', 'techSunday', 'sick', 'personalLeave', 'otNew']) {
+                if (sel[key]) sel[key].delete(name);
+            }
         }
 
-        // ========== MODAL: render lists ==========
+        function updateNameInAllSets(shift, oldName, newName) {
+            const sel = selections[shift] || {};
+            for (let key of ['otOut', 'otWork', 'sundayStaff', 'techSunday', 'sick', 'personalLeave', 'otNew']) {
+                if (sel[key] && sel[key].has(oldName)) {
+                    sel[key].delete(oldName);
+                    sel[key].add(newName);
+                }
+            }
+        }
+
+        // ============================================================
+        //  MODAL: render lists (ตาม modalShift)
+        // ============================================================
         const avClass = { prod: 'av-prod', tech: 'av-tech', qc: 'av-qc' };
         const avIcon = { prod: 'fa-person', tech: 'fa-wrench', qc: 'fa-eye' };
 
         function renderModalList(type) {
-            const arr = type === 'prod' ? masterProd : type === 'tech' ? masterTech : masterQc;
+            const shift = modalShift;
+            const arr = getStaff(shift, type);
             const list = document.getElementById('modal-list-' + type);
             if (!list) return;
             list.innerHTML = '';
@@ -1076,8 +1218,14 @@
         }
 
         function updateModalTotal() {
+            const shift = modalShift;
+            const s = staffData[shift] || { prod: [], tech: [], qc: [] };
+            const total = s.prod.length + s.tech.length + s.qc.length;
             const el = document.getElementById('total-all');
-            if (el) el.textContent = masterProd.length + masterTech.length + masterQc.length;
+            if (el) el.textContent = total;
+            // update shift label
+            const label = document.getElementById('modalShiftLabel');
+            if (label) label.textContent = 'กะ ' + shift;
         }
 
         function renderAllModalLists() {
@@ -1086,10 +1234,30 @@
             renderModalList('qc');
         }
 
+        function setModalShift(shift) {
+            modalShift = shift;
+            // update buttons
+            document.querySelectorAll('.modal-shift-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.shift === shift);
+            });
+            renderAllModalLists();
+        }
+
+        function switchModalTab(type, btn) {
+            document.querySelectorAll('.modal-tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.modal-tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('modal-panel-' + type).classList.add('active');
+        }
+
+        // ============================================================
+        //  MODAL: add / edit / delete
+        // ============================================================
         function addModalStaff(type, inputId) {
+            const shift = modalShift;
             const inp = document.getElementById(inputId);
             const val = inp.value.trim();
-            const arr = type === 'prod' ? masterProd : type === 'tech' ? masterTech : masterQc;
+            const arr = getStaff(shift, type);
             if (!val || arr.includes(val)) {
                 inp.style.outline = '2px solid #FCA5A5';
                 setTimeout(() => inp.style.outline = '', 600);
@@ -1103,15 +1271,22 @@
         }
 
         function addProdModal() { addModalStaff('prod', 'newProdName'); }
+
         function addTechModal() { addModalStaff('tech', 'newTechName'); }
+
         function addQcModal() { addModalStaff('qc', 'newQcName'); }
 
         function editModalStaff(type, idx) {
-            const arr = type === 'prod' ? masterProd : type === 'tech' ? masterTech : masterQc;
+            const shift = modalShift;
+            const arr = getStaff(shift, type);
             const oldName = arr[idx];
             Swal.fire({
-                title: 'แก้ไขชื่อ', input: 'text', inputValue: oldName,
-                confirmButtonText: 'บันทึก', showCancelButton: true, cancelButtonText: 'ยกเลิก',
+                title: 'แก้ไขชื่อ',
+                input: 'text',
+                inputValue: oldName,
+                confirmButtonText: 'บันทึก',
+                showCancelButton: true,
+                cancelButtonText: 'ยกเลิก',
                 preConfirm: (newName) => {
                     if (!newName || !newName.trim()) { Swal.showValidationMessage('กรุณากรอกชื่อ'); return false; }
                     return newName.trim();
@@ -1119,7 +1294,7 @@
             }).then(res => {
                 if (res.isConfirmed && res.value && res.value !== oldName) {
                     arr[idx] = res.value;
-                    updateNameInAllSets(oldName, res.value);
+                    updateNameInAllSets(shift, oldName, res.value);
                     saveStaffData();
                     renderModalList(type);
                     refreshAllUI();
@@ -1128,16 +1303,21 @@
         }
 
         function deleteModalStaff(type, idx) {
-            const arr = type === 'prod' ? masterProd : type === 'tech' ? masterTech : masterQc;
+            const shift = modalShift;
+            const arr = getStaff(shift, type);
             const name = arr[idx];
             Swal.fire({
-                title: 'ยืนยันลบ?', text: `ลบ "${name}" ออกจากรายชื่อ`,
-                icon: 'warning', showCancelButton: true,
-                confirmButtonColor: '#d33', confirmButtonText: 'ลบ', cancelButtonText: 'ยกเลิก'
+                title: 'ยืนยันลบ?',
+                text: `ลบ "${name}" ออกจากรายชื่อ (กะ ${shift})`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'ลบ',
+                cancelButtonText: 'ยกเลิก'
             }).then(res => {
                 if (res.isConfirmed) {
                     arr.splice(idx, 1);
-                    removeNameFromAllSets(name);
+                    removeNameFromAllSets(shift, name);
                     saveStaffData();
                     renderModalList(type);
                     refreshAllUI();
@@ -1146,14 +1326,9 @@
             });
         }
 
-        function switchModalTab(type, btn) {
-            document.querySelectorAll('.modal-tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.modal-tab-panel').forEach(p => p.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById('modal-panel-' + type).classList.add('active');
-        }
-
-        // ========== MAIN UI ==========
+        // ============================================================
+        //  MAIN UI : render ตาม current shift
+        // ============================================================
         function renderStaffGridSimple(containerId, items, selectedSet) {
             const container = document.getElementById(containerId);
             if (!container) return;
@@ -1161,7 +1336,8 @@
             items.forEach(name => {
                 const chip = document.createElement('div');
                 chip.className = `staff-chip ${selectedSet.has(name) ? 'active' : ''}`;
-                chip.innerHTML = `<span>${escapeHtml(name)}</span><i class="fas ${selectedSet.has(name) ? 'fa-circle-check' : 'fa-circle-plus'}"></i>`;
+                chip.innerHTML =
+                    `<span>${escapeHtml(name)}</span><i class="fas ${selectedSet.has(name) ? 'fa-circle-check' : 'fa-circle-plus'}"></i>`;
                 chip.addEventListener('click', () => {
                     if (selectedSet.has(name)) selectedSet.delete(name);
                     else selectedSet.add(name);
@@ -1178,7 +1354,8 @@
             personList.forEach(p => {
                 const chip = document.createElement('div');
                 chip.className = `staff-chip ${selectedSet.has(p.name) ? 'active' : ''}`;
-                chip.innerHTML = `<span>${escapeHtml(p.name)}</span><span class="badge-type">${p.type}</span><i class="fas ${selectedSet.has(p.name) ? 'fa-circle-check' : 'fa-circle-plus'}"></i>`;
+                chip.innerHTML =
+                    `<span>${escapeHtml(p.name)}</span><span class="badge-type">${p.type}</span><i class="fas ${selectedSet.has(p.name) ? 'fa-circle-check' : 'fa-circle-plus'}"></i>`;
                 chip.addEventListener('click', () => {
                     if (selectedSet.has(p.name)) selectedSet.delete(p.name);
                     else selectedSet.add(p.name);
@@ -1188,37 +1365,54 @@
             });
         }
 
-        function renderOtNewSections() {
-            renderStaffGridSimple("otNewProdList", masterProd, selectedOtNewSet);
-            renderStaffGridSimple("otNewTechList", masterTech, selectedOtNewSet);
-            renderStaffGridSimple("otNewQcList", masterQc, selectedOtNewSet);
+        function renderOtNewSections(shift) {
+            const s = staffData[shift] || { prod: [], tech: [], qc: [] };
+            const sel = selections[shift] || { otNew: new Set() };
+            renderStaffGridSimple("otNewProdList", s.prod, sel.otNew);
+            renderStaffGridSimple("otNewTechList", s.tech, sel.otNew);
+            renderStaffGridSimple("otNewQcList", s.qc, sel.otNew);
         }
 
         function refreshAllUI() {
+            const shift = getCurrentShift();
             const reportType = document.getElementById("reportTypeSelect").value;
-            document.getElementById("otNormalSection").style.display = (reportType === "ot_normal" || reportType === "ot_sunday") ? "block" : "none";
-            document.getElementById("reportAttendanceSection").style.display = (reportType === "report_attendance") ? "block" : "none";
-            document.getElementById("reportOtNewSection").style.display = (reportType === "report_ot_new") ? "block" : "none";
+            document.getElementById("otNormalSection").style.display = (reportType === "ot_normal" || reportType ===
+                "ot_sunday") ? "block" : "none";
+            document.getElementById("reportAttendanceSection").style.display = (reportType === "report_attendance") ?
+                "block" : "none";
+            document.getElementById("reportOtNewSection").style.display = (reportType === "report_ot_new") ? "block" :
+                "none";
+
+            const s = staffData[shift] || { prod: [], tech: [], qc: [] };
+            const sel = selections[shift] || {
+                otOut: new Set(), otWork: new Set(), sundayStaff: new Set(),
+                techSunday: new Set(), sick: new Set(), personalLeave: new Set(), otNew: new Set()
+            };
 
             if (reportType === "ot_normal") {
                 document.getElementById("normalSection").style.display = "block";
                 document.getElementById("sundaySection").style.display = "none";
-                renderStaffGridSimple("otOutList", masterProd, selectedOtOut);
-                renderStaffGridSimple("otWorkList", masterProd, selectedOtWork);
+                renderStaffGridSimple("otOutList", s.prod, sel.otOut);
+                renderStaffGridSimple("otWorkList", s.prod, sel.otWork);
             } else if (reportType === "ot_sunday") {
                 document.getElementById("normalSection").style.display = "none";
                 document.getElementById("sundaySection").style.display = "block";
-                renderStaffGridSimple("sundayStaffList", masterProd, selectedSundayStaff);
-                renderStaffGridSimple("technicianList", masterTech, selectedTechSunday);
+                renderStaffGridSimple("sundayStaffList", s.prod, sel.sundayStaff);
+                renderStaffGridSimple("technicianList", s.tech, sel.techSunday);
             } else if (reportType === "report_attendance") {
-                renderDynamicGrid("sickStaffList", getAllPersonnel(), selectedSickSet);
-                renderDynamicGrid("personalLeaveStaffList", getAllPersonnel(), selectedPersonalLeaveSet);
+                renderDynamicGrid("sickStaffList", getAllPersonnel(shift), sel.sick);
+                renderDynamicGrid("personalLeaveStaffList", getAllPersonnel(shift), sel.personalLeave);
             } else if (reportType === "report_ot_new") {
-                renderOtNewSections();
+                renderOtNewSections(shift);
             }
+
+            // เปิด modal ครั้งต่อไปให้ sync กับ shift ปัจจุบัน
+            // แต่ถ้า modal เปิดอยู่แล้วไม่ auto change
         }
 
-        // ========== REPORT GENERATION ==========
+        // ============================================================
+        //  REPORT GENERATION
+        // ============================================================
         function formatDateThai(dateStr) {
             if (!dateStr) return "";
             const d = new Date(dateStr);
@@ -1226,62 +1420,64 @@
             return `${d.getDate().toString().padStart(2, '0')}/${(d.getMonth() + 1).toString().padStart(2, '0')}/${d.getFullYear() + 543}`;
         }
 
-        function getCountByTypeFromSet(personSet, type) {
-            return getAllPersonnel().filter(p => personSet.has(p.name) && p.type === type).length;
-        }
-
         function generateReport() {
             const type = document.getElementById("reportTypeSelect").value;
-            const shift = document.getElementById("shift").value;
+            const shift = getCurrentShift();
             const dateText = formatDateThai(document.getElementById("date").value);
-            const totalTech = masterTech.length;
-            const totalProd = masterProd.length;
-            const totalQc = masterQc.length;
+            const s = staffData[shift] || { prod: [], tech: [], qc: [] };
+            const sel = selections[shift] || {
+                otOut: new Set(), otWork: new Set(), sundayStaff: new Set(),
+                techSunday: new Set(), sick: new Set(), personalLeave: new Set(), otNew: new Set()
+            };
+
+            const totalTech = s.tech.length;
+            const totalProd = s.prod.length;
+            const totalQc = s.qc.length;
             const totalAll = totalTech + totalProd + totalQc;
 
             if (type === "ot_normal") {
-                let out = `${dateText} ${shift}\n`;
-                if (!selectedOtOut.size) out += `ไม่มีพนักงานออก OT ค่ะ\n`;
-                else { out += `พนักงานออก OT ${selectedOtOut.size} คน ค่ะ\n`; let i = 1; for (let n of selectedOtOut) out += `${i++}.${n}\n`; }
-                if (selectedOtWork.size) { out += "OT พับถุง\n"; let i = 1; for (let n of selectedOtWork) out += `${i++}.${n}\n`; }
+                let out = `${dateText} ${shift === 'A' ? 'กะ A' : 'กะ B'}\n`;
+                if (!sel.otOut.size) out += `ไม่มีพนักงานออก OT ค่ะ\n`;
+                else {
+                    out += `พนักงานออก OT ${sel.otOut.size} คน ค่ะ\n`; let i = 1; for (let n of sel.otOut) out +=
+                        `${i++}.${n}\n`;
+                }
+                if (sel.otWork.size) { out += "OT พับถุง\n"; let i = 1; for (let n of sel.otWork) out += `${i++}.${n}\n`; }
                 return out.trim();
-            }
-            else if (type === "ot_sunday") {
-                let out = `OT วันอาทิตย์ ${shift}\n`; let idx = 1;
-                if (selectedSundayStaff.size) { out += "พนักงาน\n"; for (let n of selectedSundayStaff) out += `${idx++}.${n}\n`; }
-                if (selectedTechSunday.size) { out += "ช่างผลิต\n"; for (let n of selectedTechSunday) out += `${idx++}.${n}\n`; }
-                if (!selectedSundayStaff.size && !selectedTechSunday.size) out += "ไม่มีรายชื่อพนักงานค่ะ";
+            } else if (type === "ot_sunday") {
+                let out = `OT วันอาทิตย์ ${shift === 'A' ? 'กะ A' : 'กะ B'}\n`;
+                let idx = 1;
+                if (sel.sundayStaff.size) { out += "พนักงาน\n"; for (let n of sel.sundayStaff) out += `${idx++}.${n}\n`; }
+                if (sel.techSunday.size) { out += "ช่างผลิต\n"; for (let n of sel.techSunday) out += `${idx++}.${n}\n`; }
+                if (!sel.sundayStaff.size && !sel.techSunday.size) out += "ไม่มีรายชื่อพนักงานค่ะ";
                 return out;
-            }
-            else if (type === "report_attendance") {
-                // รวม set ลาป่วย + ลากิจ เพื่อคำนวณจำนวนคนขาด
-                const combinedAbsent = new Set([...selectedSickSet, ...selectedPersonalLeaveSet]);
-                const absentTech = getCountByTypeFromSet(combinedAbsent, "ช่าง");
-                const absentProd = getCountByTypeFromSet(combinedAbsent, "ผลิต");
-                const absentQc = getCountByTypeFromSet(combinedAbsent, "QC");
+            } else if (type === "report_attendance") {
+                const combinedAbsent = new Set([...sel.sick, ...sel.personalLeave]);
+                const absentTech = getCountByTypeFromSet(shift, combinedAbsent, "ช่าง");
+                const absentProd = getCountByTypeFromSet(shift, combinedAbsent, "ผลิต");
+                const absentQc = getCountByTypeFromSet(shift, combinedAbsent, "QC");
                 const presentTech = totalTech - absentTech;
                 const presentProd = totalProd - absentProd;
                 const presentQc = totalQc - absentQc;
                 const totalPresent = presentTech + presentProd + presentQc;
-                let output = `รายงานการมาปฎิบัติงาน \nวันที่  ${dateText}\nพนักงาน${shift}\n\n`;
+                let output = `รายงานการมาปฎิบัติงาน \nวันที่  ${dateText}\nพนักงาน${shift === 'A' ? 'กะ A' : 'กะ B'}\n\n`;
                 output += `ช่าง   ${presentTech} คน\nผลิต ${presentProd} คน\nQC    ${presentQc} คน\nรวม ${totalPresent}/${totalAll} คน\n\n`;
-                if (selectedSickSet.size) { for (let name of selectedSickSet) output += `${name} ลาป่วย\n`; }
-                if (selectedPersonalLeaveSet.size) { for (let name of selectedPersonalLeaveSet) output += `${name} ลากิจ\n`; }
-                //if (!selectedSickSet.size && !selectedPersonalLeaveSet.size) output += "ไม่มีผู้ลาป่วย/ลากิจ";
+                if (sel.sick.size) { for (let name of sel.sick) output += `${name} ลาป่วย\n`; }
+                if (sel.personalLeave.size) { for (let name of sel.personalLeave) output += `${name} ลากิจ\n`; }
                 return output;
-            }
-            else {
-                const otOutTech = getCountByTypeFromSet(selectedOtNewSet, "ช่าง");
-                const otOutProd = getCountByTypeFromSet(selectedOtNewSet, "ผลิต");
-                const otOutQc = getCountByTypeFromSet(selectedOtNewSet, "QC");
+            } else {
+                // report_ot_new
+                const otOutTech = getCountByTypeFromSet(shift, sel.otNew, "ช่าง");
+                const otOutProd = getCountByTypeFromSet(shift, sel.otNew, "ผลิต");
+                const otOutQc = getCountByTypeFromSet(shift, sel.otNew, "QC");
                 const presentTech = totalTech - otOutTech;
                 const presentProd = totalProd - otOutProd;
                 const presentQc = totalQc - otOutQc;
                 const totalPresent = presentTech + presentProd + presentQc;
-                let output = `รายงานการทำ OT\nวันที่  ${dateText}\nพนักงาน${shift}\n\n`;
+                let output = `รายงานการทำ OT\nวันที่  ${dateText}\nพนักงาน${shift === 'A' ? 'กะ A' : 'กะ B'}\n\n`;
                 output += `ช่าง   ${presentTech} คน\nผลิต ${presentProd} คน\nQC    ${presentQc} คน\nรวม ${totalPresent}/${totalAll} คน\n\n`;
-                if (selectedOtNewSet.size === 0) output += `ไม่มีรายชื่อออก OT`;
-                else { for (let name of selectedOtNewSet) output += `${name} ออก OT\n`; }
+                if (sel.otNew.size === 0) output += `ไม่มีรายชื่อออก OT`;
+                else { for (let name of sel.otNew) output += `${name} ออก OT\n`; }
                 return output;
             }
         }
@@ -1295,29 +1491,56 @@
                 badge.classList.remove('d-none');
                 setTimeout(() => badge.classList.add('d-none'), 1800);
                 Swal.fire({ icon: 'success', title: 'คัดลอกสำเร็จ!', timer: 1500, showConfirmButton: false });
-            } catch { Swal.fire('เกิดข้อผิดพลาด', '', 'error'); }
+            } catch {
+                Swal.fire('เกิดข้อผิดพลาด', '', 'error');
+            }
         }
 
+        // ============================================================
+        //  UTILITY
+        // ============================================================
         function setDefaultDate() { document.getElementById('date').value = new Date().toISOString().slice(0, 10); }
+
         function setCurrentYear() { document.getElementById('currentYear').innerText = new Date().getFullYear(); }
+
         function hideSplash() {
             const s = document.getElementById('splashScreen');
-            if (s) { s.classList.add('hide'); setTimeout(() => s.style.display = 'none', 500); }
+            if (s) {
+                s.classList.add('hide');
+                setTimeout(() => s.style.display = 'none', 500);
+            }
         }
 
         function escapeHtml(str) {
             return str.replace(/[&<>]/g, m => m === '&' ? '&amp;' : m === '<' ? '&lt;' : '&gt;');
         }
 
+        // ============================================================
+        //  INIT
+        // ============================================================
         window.addEventListener('load', () => {
             loadStaffData();
             setDefaultDate();
             setCurrentYear();
+            // ตั้งค่า modal shift ตาม current shift
+            modalShift = getCurrentShift();
+            document.querySelectorAll('.modal-shift-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.shift === modalShift);
+            });
             renderAllModalLists();
             refreshAllUI();
 
             document.getElementById('generateBtn').addEventListener('click', generateAndCopy);
             document.getElementById('reportTypeSelect').addEventListener('change', () => refreshAllUI());
+            document.getElementById('shift').addEventListener('change', () => {
+                // เมื่อเปลี่ยนกะ在主界面，refresh UI
+                // และ sync modal shift ด้วย
+                modalShift = getCurrentShift();
+                document.querySelectorAll('.modal-shift-btn').forEach(b => {
+                    b.classList.toggle('active', b.dataset.shift === modalShift);
+                });
+                refreshAllUI();
+            });
 
             document.getElementById('addProdBtn')?.addEventListener('click', addProdModal);
             document.getElementById('addTechBtn')?.addEventListener('click', addTechModal);
@@ -1326,11 +1549,23 @@
             document.querySelectorAll('.toggle-option').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const type = btn.getAttribute('data-value');
-                    document.getElementById("normalSection").style.display = type === 'normal' ? 'block' : 'none';
-                    document.getElementById("sundaySection").style.display = type === 'sunday' ? 'block' : 'none';
-                    document.querySelectorAll('.toggle-option').forEach(o => o.classList.remove('active'));
+                    document.getElementById("normalSection").style.display = type === 'normal' ? 'block' :
+                        'none';
+                    document.getElementById("sundaySection").style.display = type === 'sunday' ? 'block' :
+                        'none';
+                    document.querySelectorAll('.toggle-option').forEach(o => o.classList.remove(
+                        'active'));
                     btn.classList.add('active');
                 });
+            });
+
+            // เมื่อเปิด modal ให้ sync shift
+            document.getElementById('staffManagementModal').addEventListener('show.bs.modal', function () {
+                modalShift = getCurrentShift();
+                document.querySelectorAll('.modal-shift-btn').forEach(b => {
+                    b.classList.toggle('active', b.dataset.shift === modalShift);
+                });
+                renderAllModalLists();
             });
 
             hideSplash();
