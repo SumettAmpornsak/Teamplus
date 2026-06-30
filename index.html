@@ -1108,7 +1108,7 @@
             }
 
             // default ใหม่สำหรับทั้งสองกะ
-            staffData.B.prod = ["ปิญาพร", "ศศิวิมล", "จงรัก", "ภาวิตา", "ณัฐธิดา", "สุพิชญา", "สิทธิศักดิ์", "นุชนารถ", "กรรณิกา"];
+            staffData.B.prod = ["ปิยนุช", "ศศิวิมล", "จงรัก", "ภาวิตา", "ณัฐธิดา", "สุพิชญา", "สิทธิศักดิ์", "นุชนารถ", "กรรณิกา"];
             staffData.B.tech = ["เสกสรร", "สุรศักดิ์"];
             staffData.B.qc = ["ปราชญาทิพย์", "ปาริฉัตร"];
 
@@ -1120,7 +1120,7 @@
         }
 
         function saveStaffData() {
-            localStorage.setItem("teamplus_full_data_v3", JSON.stringify(staffData));
+            localStorage.setItem("teamplus_full_data_v4", JSON.stringify(staffData));
             // save selections
             const selSave = {};
             for (let s of ['A', 'B']) {
